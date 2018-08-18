@@ -24,10 +24,11 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             plugins: [
+              'transform-decorators-legacy',
               'transform-class-properties',
               'transform-object-rest-spread',
             ],
-            presets: ['babel-preset-env', 'babel-preset-react'],
+            presets: ['babel-preset-env', 'babel-preset-react', 'stage-1'],
           },
         },
       },
