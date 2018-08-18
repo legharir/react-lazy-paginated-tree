@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import type { Node, TreeState, TreeProps, Event } from '../types';
-import { populateCache, hasChildren } from '../util';
+import { populateCache } from '../util';
 import TreeNode from './TreeNode';
 
 class Tree extends Component<TreeProps, TreeState> {
@@ -30,9 +30,9 @@ class Tree extends Component<TreeProps, TreeState> {
   };
 
   toggle = async (nodeId: string): Promise<void> => {
-    const state = { ...this.state };
-    const node = state.cache[nodeId];
-    if (hasChildren(node) && node.numChildren !== node.children.length) {
+    const state: TreeState = { ...this.state };
+    const node: Node = state.cache[nodeId];
+    if (!node.fullyFetched) {
       node.children = await this.lazyLoad(nodeId);
     }
     node.toggled = !node.toggled;
@@ -46,8 +46,9 @@ class Tree extends Component<TreeProps, TreeState> {
   };
 
   select = (nodeId: string): void => {
-    const state = { ...this.state };
-    state.cache[nodeId].selected = !state.cache[nodeId].selected;
+    const state: TreeState = { ...this.state };
+    const node: Node = state.cache[nodeId];
+    node.selected = !node.selected;
     this.setState(state);
   };
 

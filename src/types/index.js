@@ -5,8 +5,8 @@ export type Node = {
   name: string,
   description: string,
   children: Array<Node>,
-  loaded: boolean,
-  count: number,
+  fullyFetched: boolean,
+  page: number,
   toggled: boolean,
   selected: boolean,
 };
