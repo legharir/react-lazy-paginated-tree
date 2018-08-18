@@ -1,39 +1,12 @@
 // @flow
 
 import React, { Component } from 'react';
-import type { Node, Theme, Cache } from '../types';
+import type { Node, TreeState, TreeProps } from '../types';
+import { populateCache } from '../util';
 import TreeNode from './TreeNode';
 
-type State = {
-  nodes: Array<Node>,
-  cache: Cache,
-};
-
-type Props = {
-  nodes: Array<Node>,
-  theme: Theme,
-
-  // optional redux state management overrides
-  toggle?: Function,
-  onKeyToggle?: Function,
-  select?: Function,
-  onKeySelect?: Function,
-};
-
-const populateCache = (cache: Cache, nodes: Array<Node>): Cache => {
-  for (let i = 0; i < nodes.length; i += 1) {
-    const node = nodes[i];
-    cache[node.id] = node;
-    const { children } = node;
-    if (children && children.constructor === Array && children.length > 0) {
-      populateCache(cache, children);
-    }
-  }
-  return cache;
-};
-
-class Tree extends Component<Props, State> {
-  constructor(props: Props) {
+class Tree extends Component<TreeProps, TreeState> {
+  constructor(props: TreeProps) {
     super(props);
     const cache = {};
     const { nodes } = props;

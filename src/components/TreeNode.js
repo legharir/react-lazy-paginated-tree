@@ -1,23 +1,13 @@
 // @flow
 
 import React, { Component } from 'react';
-import type { Node, Theme } from '../types';
+import type { Node, TreeNodeProps } from '../types';
 import DefaultIcon from './Icon';
 import DefaultBody from './Body';
 import Animated from '../decorators/Animated';
 
-type Props = {
-  node: Node,
-  theme: Theme,
-  depth: number,
-  toggle: Function,
-  onKeyToggle: Function,
-  select: Function,
-  onKeySelect: Function,
-};
-
 @Animated()
-class TreeNode extends Component<Props> {
+class TreeNode extends Component<TreeNodeProps> {
   hasChildren = (): boolean => {
     const { node } = this.props;
     return (

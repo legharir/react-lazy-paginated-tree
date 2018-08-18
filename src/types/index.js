@@ -24,3 +24,29 @@ export type Theme = {
 };
 
 export type Cache = Object;
+
+export type TreeState = {
+  nodes: Array<Node>,
+  cache: Cache,
+};
+
+export type TreeProps = {
+  nodes: Array<Node>,
+  theme: Theme,
+
+  // optional redux state management overrides
+  toggle?: Function,
+  onKeyToggle?: Function,
+  select?: Function,
+  onKeySelect?: Function,
+};
+
+export type TreeNodeProps = {
+  node: Node,
+  theme: Theme,
+  depth: number,
+  toggle: Function,
+  onKeyToggle: Function,
+  select: Function,
+  onKeySelect: Function,
+};
