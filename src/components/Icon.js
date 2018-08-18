@@ -1,16 +1,9 @@
 // @flow
 
 import React from 'react';
-import type { Node, Theme } from '../types';
+import type { IconProps } from '../types';
 
-type Props = {
-  theme: Theme,
-  node: Node,
-  onClick: Function,
-  onKeyPress: Function,
-};
-
-const Icon = ({ theme, node, onClick, onKeyPress }: Props) => (
+const Icon = ({ theme, node, onClick, onKeyPress }: IconProps) => (
   <div
     style={theme.nodeIconContainerStyle}
     onClick={() => onClick(node.id)}

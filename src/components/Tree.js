@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
-import type { Node, TreeState, TreeProps } from '../types';
+import type { Node, TreeState, TreeProps, Event } from '../types';
 import { populateCache } from '../util';
 import TreeNode from './TreeNode';
 
@@ -29,7 +29,7 @@ class Tree extends Component<TreeProps, TreeState> {
     this.setState(state);
   };
 
-  onKeyToggle = (e: Object, nodeId: string): void => {
+  onKeyToggle = (e: Event, nodeId: string): void => {
     if (e.key === 'Enter') {
       this.toggle(nodeId);
     }
@@ -41,7 +41,7 @@ class Tree extends Component<TreeProps, TreeState> {
     this.setState(state);
   };
 
-  onKeySelect = (e: Object, nodeId: string): void => {
+  onKeySelect = (e: Event, nodeId: string): void => {
     if (e.key === 'Enter') {
       this.select(nodeId);
     }

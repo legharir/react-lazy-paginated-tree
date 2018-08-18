@@ -25,6 +25,8 @@ export type Theme = {
 
 export type Cache = Object;
 
+export type Event = Object;
+
 export type TreeState = {
   nodes: Array<Node>,
   cache: Cache,
@@ -49,4 +51,18 @@ export type TreeNodeProps = {
   onKeyToggle: Function,
   select: Function,
   onKeySelect: Function,
+};
+
+export type IconProps = {
+  theme: Theme,
+  node: Node,
+  onClick: Function,
+  onKeyPress: Function,
+};
+
+export type BodyProps = {
+  theme: Theme,
+  node: Node,
+  onClick: Function,
+  onKeyPress: Function,
 };

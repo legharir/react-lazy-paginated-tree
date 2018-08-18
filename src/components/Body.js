@@ -1,16 +1,9 @@
 // @flow
 
 import React from 'react';
-import type { Node, Theme } from '../types';
+import type { BodyProps } from '../types';
 
-type Props = {
-  theme: Theme,
-  node: Node,
-  onClick: Function,
-  onKeyPress: Function,
-};
-
-const Body = ({ theme, node, onClick, onKeyPress }: Props) => (
+const Body = ({ theme, node, onClick, onKeyPress }: BodyProps) => (
   <div
     style={theme.nodeBodyStyle}
     onClick={() => onClick(node.id)}
