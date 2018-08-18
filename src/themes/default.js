@@ -35,7 +35,7 @@ const theme: Theme = {
     backgroundColor: 'lightgreen',
   },
   listContainerStyle: {},
-  listStyle: {},
+  listStyle: { paddingLeft: 20 },
 };
 
 export default theme;
