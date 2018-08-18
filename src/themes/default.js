@@ -15,16 +15,24 @@ const theme: Theme = {
     marginTop: 2,
     marginBottom: 2,
   },
+  nodeIconContainerStyle: {
+    width: 20,
+    display: 'inline-block',
+    textAlign: 'center',
+  },
   nodeIconStyle: {
     fill: '#9DA5AB',
     strokeWidth: 0,
     height: 10,
   },
   nodeBodyStyle: {
+    width: 'calc(100% - 25px)',
     display: 'inline-block',
-    maxWidth: '100%',
     wordWrap: 'break-word',
     paddingLeft: 5,
+  },
+  nodeHighlightStyle: {
+    backgroundColor: 'lightgreen',
   },
   listContainerStyle: {},
   listStyle: {},

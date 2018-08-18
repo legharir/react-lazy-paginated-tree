@@ -8,6 +8,7 @@ export type Node = {
   loaded: boolean,
   count: number,
   toggled: boolean,
+  selected: boolean,
 };
 
 export type Theme = {
@@ -16,8 +17,10 @@ export type Theme = {
   listStyle: Object,
   nodeContainerStyle: Object,
   nodeStyle: Object,
+  nodeIconContainerStyle: Object,
   nodeIconStyle: Object,
   nodeBodyStyle: Object,
+  nodeHighlightStyle: Object,
 };
 
 export type Cache = Object;

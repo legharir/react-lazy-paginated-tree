@@ -16,6 +16,8 @@ type Props = {
   // optional redux state management overrides
   toggle?: Function,
   onKeyToggle?: Function,
+  select?: Function,
+  onKeySelect?: Function,
 };
 
 const populateCache = (cache: Cache, nodes: Array<Node>): Cache => {
@@ -44,17 +46,31 @@ class Tree extends Component<Props, State> {
 
     this.toggle = props.toggle || this.toggle;
     this.onKeyToggle = props.onKeyToggle || this.onKeyToggle;
+    this.select = props.select || this.select;
+    this.onKeySelect = props.onKeySelect || this.onKeySelect;
   }
 
-  toggle = (nodeId: string) => {
+  toggle = (nodeId: string): void => {
     const state = { ...this.state };
     state.cache[nodeId].toggled = !state.cache[nodeId].toggled;
     this.setState(state);
   };
 
-  onKeyToggle = (e: Object, nodeId: string) => {
+  onKeyToggle = (e: Object, nodeId: string): void => {
     if (e.key === 'Enter') {
       this.toggle(nodeId);
+    }
+  };
+
+  select = (nodeId: string): void => {
+    const state = { ...this.state };
+    state.cache[nodeId].selected = !state.cache[nodeId].selected;
+    this.setState(state);
+  };
+
+  onKeySelect = (e: Object, nodeId: string): void => {
+    if (e.key === 'Enter') {
+      this.select(nodeId);
     }
   };
 
@@ -70,6 +86,8 @@ class Tree extends Component<Props, State> {
             theme={theme}
             toggle={this.toggle}
             onKeyToggle={this.onKeyToggle}
+            select={this.select}
+            onKeySelect={this.onKeySelect}
           />
         ))}
       </ul>
