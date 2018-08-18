@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
   mode: 'development',
-  entry: './src/index.jsx',
+  entry: ['babel-polyfill', './src/index.js'],
   devServer: {
     contentBase: './dist',
   },
@@ -27,6 +27,7 @@ module.exports = {
               'transform-decorators-legacy',
               'transform-class-properties',
               'transform-object-rest-spread',
+              'transform-async-to-generator',
             ],
             presets: ['babel-preset-env', 'babel-preset-react', 'stage-1'],
           },

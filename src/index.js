@@ -11,6 +11,7 @@ import SimpleTree from './sample/SimpleTree';
   nodes={nodes}
   theme={theme}
   animation={animation}
+  lazyLoad={lazyLoad}
 />
 */
 

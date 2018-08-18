@@ -2,21 +2,13 @@
 
 import React, { Component } from 'react';
 import type { Node, TreeNodeProps } from '../types';
+import { hasChildren } from '../util';
 import DefaultIcon from './Icon';
 import DefaultBody from './Body';
 import Animated from '../decorators/Animated';
 
 @Animated()
 class TreeNode extends Component<TreeNodeProps> {
-  hasChildren = (): boolean => {
-    const { node } = this.props;
-    return (
-      node.children &&
-      node.children.constructor === Array &&
-      node.children.length > 0
-    );
-  };
-
   render() {
     const {
       node,
@@ -35,7 +27,7 @@ class TreeNode extends Component<TreeNodeProps> {
             ...(node.selected ? theme.nodeHighlightStyle : {}),
           }}
         >
-          {this.hasChildren() && (
+          {hasChildren(node) && (
             <DefaultIcon
               theme={theme}
               node={node}
@@ -53,7 +45,7 @@ class TreeNode extends Component<TreeNodeProps> {
         <span style={theme.listContainerStyle}>
           <ul style={theme.listStyle}>
             {node.toggled &&
-              this.hasChildren() &&
+              hasChildren(node) &&
               node.children.map((childNode: Node) => (
                 <TreeNode
                   key={childNode.id}
