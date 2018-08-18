@@ -15,6 +15,17 @@ const theme: Theme = {
     marginTop: 2,
     marginBottom: 2,
   },
+  nodeIconStyle: {
+    fill: '#9DA5AB',
+    strokeWidth: 0,
+    height: 10,
+  },
+  nodeBodyStyle: {
+    display: 'inline-block',
+    maxWidth: '100%',
+    wordWrap: 'break-word',
+    paddingLeft: 5,
+  },
   listContainerStyle: {},
   listStyle: {},
 };

@@ -16,6 +16,8 @@ export type Theme = {
   listStyle: Object,
   nodeContainerStyle: Object,
   nodeStyle: Object,
+  nodeIconStyle: Object,
+  nodeBodyStyle: Object,
 };
 
 export type Cache = Object;
