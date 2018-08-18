@@ -16,8 +16,8 @@ export default [
             children: [
               {
                 id: 8,
-                name: 'seven',
-                description: 'seven',
+                name: 'eight',
+                description: 'eight',
                 children: [],
                 loaded: true,
                 count: 0,

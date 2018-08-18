@@ -16,10 +16,10 @@ class TreeNode extends Component<Props, State> {
     const { node, level, theme } = this.props;
     const childLevel = level + 1;
     return (
-      <li style={theme.listStyle}>
+      <li style={theme.nodeContainerStyle}>
         <div style={theme.nodeStyle}>{node.name}</div>
-        <span>
-          <ul>
+        <span style={theme.listContainerStyle}>
+          <ul style={theme.listStyle}>
             {node.children &&
               node.children.map((childNode: Node) => (
                 <TreeNode node={childNode} level={childLevel} theme={theme} />

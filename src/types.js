@@ -10,7 +10,9 @@ export type Node = {
 };
 
 export type Theme = {
-  indentation: number,
+  treeStyle: Object,
+  listContainerStyle: Object,
   listStyle: Object,
+  nodeContainerStyle: Object,
   nodeStyle: Object,
 };

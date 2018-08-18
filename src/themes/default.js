@@ -1,7 +1,12 @@
+// @flow
+
 import type { Theme } from '../types';
 
 const theme: Theme = {
-  listStyle: {
+  treeStyle: {
+    padding: 0,
+  },
+  nodeContainerStyle: {
     listStyle: 'none',
   },
   nodeStyle: {
@@ -10,6 +15,8 @@ const theme: Theme = {
     marginTop: 2,
     marginBottom: 2,
   },
+  listContainerStyle: {},
+  listStyle: {},
 };
 
 export default theme;

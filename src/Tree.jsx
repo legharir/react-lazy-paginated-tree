@@ -15,7 +15,7 @@ class Tree extends Component<Props, State> {
   render() {
     const { nodes, theme } = this.props;
     return (
-      <ul>
+      <ul style={theme.treeStyle}>
         {nodes.map((node: Node) => (
           <TreeNode node={node} level={1} theme={theme} />
         ))}
