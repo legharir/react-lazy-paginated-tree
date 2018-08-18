@@ -2,6 +2,8 @@
 
 import React, { Component } from 'react';
 import type { Node, Theme } from '../types';
+import DefaultIcon from './DefaultIcon';
+import DefaultBody from './DefaultBody';
 
 type Props = {
   node: Node,
@@ -42,41 +44,19 @@ class TreeNode extends Component<Props> {
           }}
         >
           {this.hasChildren() && (
-            <div
-              style={theme.nodeIconContainerStyle}
-              onClick={() => toggle(node.id)}
-              onKeyPress={e => onKeyToggle(e, node.id)}
-              role="button"
-              tabIndex={0}
-            >
-              <svg
-                height={theme.nodeIconStyle.height}
-                width={theme.nodeIconStyle.height}
-              >
-                <polygon
-                  points={
-                    node.toggled
-                      ? `0,0 ${theme.nodeIconStyle.height},0
-                    ${theme.nodeIconStyle.height / 2},
-                    ${theme.nodeIconStyle.height}`
-                      : `0,0 0,${theme.nodeIconStyle.height}
-                    ${theme.nodeIconStyle.height},
-                    ${theme.nodeIconStyle.height / 2}`
-                  }
-                  style={theme.nodeIconStyle}
-                />
-              </svg>
-            </div>
+            <DefaultIcon
+              theme={theme}
+              node={node}
+              onClick={toggle}
+              onKeyPress={onKeyToggle}
+            />
           )}
-          <div
-            style={theme.nodeBodyStyle}
-            onClick={() => select(node.id)}
-            onKeyPress={e => onKeySelect(e, node.id)}
-            role="button"
-            tabIndex={0}
-          >
-            {node.name}
-          </div>
+          <DefaultBody
+            theme={theme}
+            node={node}
+            onClick={select}
+            onKeyPress={onKeySelect}
+          />
         </div>
         <span style={theme.listContainerStyle}>
           <ul style={theme.listStyle}>
