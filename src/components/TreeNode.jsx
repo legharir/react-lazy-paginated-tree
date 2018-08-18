@@ -2,8 +2,8 @@
 
 import React, { Component } from 'react';
 import type { Node, Theme } from '../types';
-import DefaultIcon from './DefaultIcon';
-import DefaultBody from './DefaultBody';
+import DefaultIcon from './Icon';
+import DefaultBody from './Body';
 
 type Props = {
   node: Node,

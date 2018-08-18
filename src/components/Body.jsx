@@ -10,7 +10,7 @@ type Props = {
   onKeyPress: Function,
 };
 
-const DefaultIcon = ({ theme, node, onClick, onKeyPress }: Props) => (
+const Body = ({ theme, node, onClick, onKeyPress }: Props) => (
   <div
     style={theme.nodeBodyStyle}
     onClick={() => onClick(node.id)}
@@ -22,4 +22,4 @@ const DefaultIcon = ({ theme, node, onClick, onKeyPress }: Props) => (
   </div>
 );
 
-export default DefaultIcon;
+export default Body;
