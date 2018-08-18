@@ -1,3 +1,3 @@
-import NodeUtilities from './NodeUtilities';
+import Animated from './Animated';
 
-export { NodeUtilities };
+export { Animated };

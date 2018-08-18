@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import type { Node, Theme } from '../types';
 import DefaultIcon from './Icon';
 import DefaultBody from './Body';
-import { NodeUtilities } from '../decorators';
+import { Animated } from '../decorators';
 
 type Props = {
   node: Node,
@@ -16,10 +16,16 @@ type Props = {
   onKeySelect: Function,
 };
 
-@NodeUtilities
+@Animated()
 class TreeNode extends Component<Props> {
-  // prettier-ignore
-  hasChildren() { /* decorator stub */ } // eslint-disable-line
+  hasChildren = (): boolean => {
+    const { node } = this.props;
+    return (
+      node.children &&
+      node.children.constructor === Array &&
+      node.children.length > 0
+    );
+  };
 
   render() {
     const {
