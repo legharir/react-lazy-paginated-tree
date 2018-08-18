@@ -2,9 +2,9 @@
 
 import React from 'react'; // eslint-disable-line
 import { render } from 'react-dom';
-import ReactLazyPaginatedTree from './Tree';
+import ReactLazyPaginatedTree from './components/Tree';
 import theme from './themes/default';
-import nodes from './sample';
+import nodes from './data/sample';
 
 const elem = document.getElementById('app');
 if (elem) {

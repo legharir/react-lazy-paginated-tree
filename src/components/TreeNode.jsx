@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
-import type { Node, Theme } from './types';
+import type { Node, Theme } from '../types';
 
 type Props = {
   node: Node,

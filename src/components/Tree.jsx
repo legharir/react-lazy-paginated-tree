@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
-import type { Node, Theme, Cache } from './types';
+import type { Node, Theme, Cache } from '../types';
 import TreeNode from './TreeNode';
 
 type State = {
