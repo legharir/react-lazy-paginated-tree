@@ -31,6 +31,7 @@ class TreeNode extends Component<Props, State> {
           <ul style={theme.listStyle}>
             {node.toggled &&
               node.children &&
+              node.children.constructor === Array &&
               node.children.map((childNode: Node) => (
                 <TreeNode
                   key={childNode.id}
