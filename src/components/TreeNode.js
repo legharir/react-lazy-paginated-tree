@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import type { Node, Theme } from '../types';
 import DefaultIcon from './Icon';
 import DefaultBody from './Body';
-import { Animated } from '../decorators';
+import Animated from '../decorators/Animated';
 
 type Props = {
   node: Node,
