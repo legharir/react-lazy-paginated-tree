@@ -6,6 +6,14 @@ import ReactLazyPaginatedTree from './components/Tree';
 import theme from './themes/default';
 import SimpleTree from './sample/SimpleTree';
 
+/*
+<ReactLazyPaginatedTree
+  nodes={nodes}
+  theme={theme}
+  animation={animation}
+/>
+*/
+
 const elem = document.getElementById('app');
 if (elem) {
   render(<ReactLazyPaginatedTree nodes={SimpleTree} theme={theme} />, elem);
