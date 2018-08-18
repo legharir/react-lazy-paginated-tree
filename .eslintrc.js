@@ -1,21 +1,17 @@
 module.exports = {
   env: {
     browser: true,
-    es6: true,
-    node: true,
   },
-  extends: 'eslint:recommended',
+  extends: 'airbnb',
+  plugins: ['react', 'jsx-a11y', 'import'],
   parser: 'babel-eslint',
-  parserOptions: {
-    ecmaFeatures: {
-      jsx: true,
-    },
-    sourceType: 'module',
-  },
   rules: {
     indent: ['error', 2],
     'linebreak-style': ['error', 'unix'],
     quotes: ['error', 'single'],
     semi: ['error', 'always'],
+    'react/prefer-stateless-function': 0,
+    'operator-linebreak': 0,
+    'object-curly-newline': 0,
   },
 };
