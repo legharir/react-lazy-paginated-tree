@@ -7,6 +7,7 @@ export type Node = {
   children: Array<Node>,
   loaded: boolean,
   count: number,
+  toggled: boolean,
 };
 
 export type Theme = {
@@ -16,3 +17,5 @@ export type Theme = {
   nodeContainerStyle: Object,
   nodeStyle: Object,
 };
+
+export type Cache = Object;
