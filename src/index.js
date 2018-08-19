@@ -6,6 +6,7 @@ import ReactLazyPaginatedTree from './components/Tree';
 import DefaultTheme from './themes/default';
 import DarkTheme from './themes/dark';
 import SimpleTree from './sample/SimpleTree';
+import SimpleTreeTwo from './sample/SimpleTreeTwo';
 
 const defaultElem = document.getElementById('default');
 const customElem = document.getElementById('custom');
@@ -16,7 +17,7 @@ if (defaultElem && customElem && mui) {
     defaultElem,
   );
   render(
-    <ReactLazyPaginatedTree nodes={SimpleTree} theme={DarkTheme} />,
+    <ReactLazyPaginatedTree nodes={SimpleTreeTwo} theme={DarkTheme} />,
     customElem,
   );
   render(
