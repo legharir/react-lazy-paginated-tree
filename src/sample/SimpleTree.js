@@ -1,22 +1,22 @@
 export default [
   {
     id: 1,
-    name: 'Name',
-    description: 'Description',
+    name: '2017',
+    description: 'Last Year',
     children: [
       {
         id: 2,
-        name: 'Name',
+        name: 'Q1',
         description: 'Description',
         children: [
           {
             id: 7,
-            name: 'Name',
+            name: 'January',
             description: 'Description',
             children: [
               {
                 id: 8,
-                name: 'Name',
+                name: 'Week 1',
                 description: 'Description',
                 children: [],
                 fullyFetched: true,
@@ -35,7 +35,7 @@ export default [
       },
       {
         id: 3,
-        name: 'Name',
+        name: 'Q2',
         description: 'Description',
         children: [],
         fullyFetched: true,
@@ -44,7 +44,16 @@ export default [
       },
       {
         id: 4,
-        name: 'Name',
+        name: 'Q3',
+        description: 'Description',
+        children: [],
+        fullyFetched: true,
+        toggled: true,
+        selected: false,
+      },
+      {
+        id: 9,
+        name: 'Q4',
         description: 'Description',
         children: [],
         fullyFetched: true,
@@ -58,13 +67,13 @@ export default [
   },
   {
     id: 5,
-    name: 'Name',
-    description: 'Description',
+    name: '2018',
+    description: 'Current Year',
     children: [
       {
         id: 6,
-        name: 'Name',
-        description: 'Description',
+        name: 'Q1',
+        description: 'Current Quarter',
         children: [],
         fullyFetched: true,
         toggled: true,

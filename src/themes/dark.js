@@ -14,6 +14,7 @@ const theme: Theme = prefixer({
     listStyle: 'none',
   },
   nodeStyle: {
+    backgroundColor: '#4d4d4d',
     display: 'flex',
     padding: '5px',
     margin: '2px 0',
@@ -32,9 +33,10 @@ const theme: Theme = prefixer({
     flex: 1,
     wordWrap: 'break-word',
     paddingLeft: '5px',
+    color: 'white',
   },
   nodeHighlightStyle: {
-    backgroundColor: '#f3f3f3',
+    backgroundColor: 'black',
   },
   listContainerStyle: {},
   listStyle: { paddingLeft: '20px' },

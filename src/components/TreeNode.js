@@ -28,13 +28,7 @@ class TreeNode extends Component<TreeNodeProps> {
             ...(node.selected ? theme.nodeHighlightStyle : {}),
           }}
         >
-          <DefaultCheckbox
-            checked={node.selected}
-            node={node}
-            onChange={select}
-            onKeyPress={onKeySelect}
-          />
-          {hasChildren(node) && (
+          {hasChildren(node) ? (
             <span
               style={theme.nodeIconContainerStyle}
               onClick={() => toggle(node.id)}
@@ -49,7 +43,15 @@ class TreeNode extends Component<TreeNodeProps> {
                 onKeyPress={onKeyToggle}
               />
             </span>
+          ) : (
+            <span style={theme.nodeIconContainerStyle} /> /* placeholder */
           )}
+          <DefaultCheckbox
+            checked={node.selected}
+            node={node}
+            onChange={select}
+            onKeyPress={onKeySelect}
+          />
           <span
             style={theme.nodeBodyStyle}
             onClick={() => select(node.id)}
