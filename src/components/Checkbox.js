@@ -3,12 +3,12 @@
 import React from 'react';
 import type { CheckboxProps } from '../types';
 
-const Checkbox = ({ value, node, onChange, onKeyPress }: CheckboxProps) => (
+const Checkbox = ({ checked, node, onChange, onKeyPress }: CheckboxProps) => (
   <input
     type="checkbox"
     tabIndex={0}
     onChange={() => onChange(node.id)}
-    value={value}
+    checked={checked}
     onKeyPress={e => onKeyPress(e, node.id)}
   />
 );

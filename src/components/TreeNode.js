@@ -29,7 +29,7 @@ class TreeNode extends Component<TreeNodeProps> {
           }}
         >
           <DefaultCheckbox
-            value={node.selected}
+            checked={node.selected}
             node={node}
             onChange={select}
             onKeyPress={onKeySelect}

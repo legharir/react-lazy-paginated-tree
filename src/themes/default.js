@@ -8,39 +8,37 @@ const prefixer = postcssJs.sync([autoprefixer]);
 
 const theme: Theme = prefixer({
   treeStyle: {
-    padding: 0,
+    padding: '0',
   },
   nodeContainerStyle: {
     listStyle: 'none',
   },
   nodeStyle: {
     display: 'flex',
-    width: '100%',
-    padding: 5,
+    padding: '5px',
+    margin: '2px 0',
     backgroundColor: '#f3f3f3',
-    marginTop: 2,
-    marginBottom: 2,
   },
   nodeIconContainerStyle: {
-    width: 20,
+    width: '20px',
     display: 'inline-block',
     textAlign: 'center',
   },
   nodeIconStyle: {
     fill: '#9DA5AB',
-    strokeWidth: 0,
-    height: 10,
+    strokeWidth: '0',
+    height: '12px',
   },
   nodeBodyStyle: {
     flex: 1,
     wordWrap: 'break-word',
-    paddingLeft: 5,
+    paddingLeft: '5px',
   },
   nodeHighlightStyle: {
     backgroundColor: '#ccffcc',
   },
   listContainerStyle: {},
-  listStyle: { paddingLeft: 20 },
+  listStyle: { paddingLeft: '20px' },
 });
 
 export default theme;

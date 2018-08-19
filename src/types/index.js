@@ -63,7 +63,7 @@ export type IconProps = {
 };
 
 export type CheckboxProps = {
-  value: boolean,
+  checked: boolean,
   node: Node,
   onChange: Function,
   onKeyPress: Function,
