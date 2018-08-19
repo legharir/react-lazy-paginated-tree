@@ -32,7 +32,7 @@ const theme: Theme = {
     paddingLeft: 5,
   },
   nodeHighlightStyle: {
-    backgroundColor: 'lightgreen',
+    backgroundColor: '#ccffcc',
   },
   listContainerStyle: {},
   listStyle: { paddingLeft: 20 },

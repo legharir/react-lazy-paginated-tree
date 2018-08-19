@@ -33,6 +33,7 @@ export type TreeState = {
 };
 
 export type TreeProps = {
+  style?: Object,
   nodes: Array<Node>,
   theme: Theme,
 

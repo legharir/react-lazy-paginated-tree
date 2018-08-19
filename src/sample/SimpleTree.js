@@ -1,23 +1,23 @@
 export default [
   {
     id: 1,
-    name: 'one',
-    description: 'one',
+    name: 'Name',
+    description: 'Description',
     children: [
       {
         id: 2,
-        name: 'two',
-        description: 'two',
+        name: 'Name',
+        description: 'Description',
         children: [
           {
             id: 7,
-            name: 'seven',
-            description: 'seven',
+            name: 'Name',
+            description: 'Description',
             children: [
               {
                 id: 8,
-                name: 'eight',
-                description: 'eight',
+                name: 'Name',
+                description: 'Description',
                 children: [],
                 fullyFetched: true,
                 toggled: true,
@@ -35,8 +35,8 @@ export default [
       },
       {
         id: 3,
-        name: 'three',
-        description: 'three',
+        name: 'Name',
+        description: 'Description',
         children: [],
         fullyFetched: true,
         toggled: true,
@@ -44,8 +44,8 @@ export default [
       },
       {
         id: 4,
-        name: 'four',
-        description: 'four',
+        name: 'Name',
+        description: 'Description',
         children: [],
         fullyFetched: true,
         toggled: true,
@@ -58,13 +58,13 @@ export default [
   },
   {
     id: 5,
-    name: 'five',
-    description: 'five',
+    name: 'Name',
+    description: 'Description',
     children: [
       {
         id: 6,
-        name: 'six',
-        description: 'six',
+        name: 'Name',
+        description: 'Description',
         children: [],
         fullyFetched: true,
         toggled: true,

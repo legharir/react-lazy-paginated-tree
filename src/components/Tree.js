@@ -66,9 +66,9 @@ class Tree extends Component<TreeProps, TreeState> {
   };
 
   render() {
-    const { nodes, theme } = this.props;
+    const { nodes, theme, style } = this.props;
     return (
-      <ul style={theme.treeStyle}>
+      <ul style={{ ...theme.treeStyle, ...style }}>
         {nodes.map((node: Node) => (
           <TreeNode
             key={node.id}

@@ -1,7 +1,8 @@
 {
   "name": "react-lazy-paginated-tree",
-  "version": "0.0.2",
-  "description": "Customizable React Tree-View with Lazy Loading and Pagination",
+  "version": "0.0.3",
+  "description":
+    "Customizable React Tree-View with Lazy Loading and Pagination",
   "main": "dist/index.js",
   "dependencies": {
     "babel-plugin-transform-object-rest-spread": "^6.26.0",

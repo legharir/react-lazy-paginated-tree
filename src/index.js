@@ -15,9 +15,19 @@ import SimpleTree from './sample/SimpleTree';
 />
 */
 
-const elem = document.getElementById('app');
-if (elem) {
-  render(<ReactLazyPaginatedTree nodes={SimpleTree} theme={theme} />, elem);
+const defaultElem = document.getElementById('default');
+const customElem = document.getElementById('custom');
+const mui = document.getElementById('mui');
+if (defaultElem && customElem && mui) {
+  render(
+    <ReactLazyPaginatedTree nodes={SimpleTree} theme={theme} />,
+    defaultElem,
+  );
+  render(
+    <ReactLazyPaginatedTree nodes={SimpleTree} theme={theme} />,
+    customElem,
+  );
+  render(<ReactLazyPaginatedTree nodes={SimpleTree} theme={theme} />, mui);
 }
 
 export default ReactLazyPaginatedTree;
