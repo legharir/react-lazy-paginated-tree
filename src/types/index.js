@@ -41,7 +41,7 @@ export type TreeProps = {
   onKeyToggle?: Function,
   select?: Function,
   onKeySelect?: Function,
-  lazyLoad?: Function,
+  loadChildren?: Function,
 };
 
 export type TreeNodeProps = {

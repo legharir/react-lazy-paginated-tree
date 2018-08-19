@@ -9,7 +9,14 @@ class Tree extends Component<TreeProps, TreeState> {
   constructor(props: TreeProps) {
     super(props);
     const cache = {};
-    const { nodes, toggle, onKeyToggle, select, onKeySelect, lazyLoad } = props;
+    const {
+      nodes,
+      toggle,
+      onKeyToggle,
+      select,
+      onKeySelect,
+      loadChildren,
+    } = props;
     populateCache(cache, nodes);
 
     this.state = {
@@ -21,10 +28,10 @@ class Tree extends Component<TreeProps, TreeState> {
     this.onKeyToggle = onKeyToggle || this.onKeyToggle;
     this.select = select || this.select;
     this.onKeySelect = onKeySelect || this.onKeySelect;
-    this.lazyLoad = lazyLoad || this.lazyLoad;
+    this.loadChildren = loadChildren || this.loadChildren;
   }
 
-  lazyLoad = (nodeId: string): Array<Node> => {
+  loadChildren = (nodeId: string): Array<Node> => {
     console.log(nodeId);
     return [];
   };
@@ -33,7 +40,7 @@ class Tree extends Component<TreeProps, TreeState> {
     const state: TreeState = { ...this.state };
     const node: Node = state.cache[nodeId];
     if (!node.fullyFetched) {
-      node.children = await this.lazyLoad(nodeId);
+      node.children = await this.loadChildren(nodeId);
     }
     node.toggled = !node.toggled;
     this.setState(state);
