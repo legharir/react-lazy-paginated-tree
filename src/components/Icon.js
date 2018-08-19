@@ -3,29 +3,26 @@
 import React from 'react';
 import type { IconProps } from '../types';
 
-const Icon = ({ theme, node, onClick, onKeyPress }: IconProps) => (
-  <div
-    style={theme.nodeIconContainerStyle}
-    onClick={() => onClick(node.id)}
-    onKeyPress={e => onKeyPress(e, node.id)}
-    role="button"
-    tabIndex={0}
-  >
-    <svg height={theme.nodeIconStyle.height} width={theme.nodeIconStyle.height}>
+const stripPx = val => parseInt(val, 10);
+
+const Icon = ({ theme, node }: IconProps) => {
+  const height = stripPx(theme.nodeIconStyle.height);
+  return (
+    <svg height={height} width={height}>
       <polygon
         points={
           node.toggled
-            ? `0,0 ${theme.nodeIconStyle.height},0
-          ${theme.nodeIconStyle.height / 2},
-          ${theme.nodeIconStyle.height}`
-            : `0,0 0,${theme.nodeIconStyle.height}
-          ${theme.nodeIconStyle.height},
-          ${theme.nodeIconStyle.height / 2}`
+            ? `0,0 ${height},0
+          ${height / 2},
+          ${height}`
+            : `0,0 0,${height}
+          ${height},
+          ${height / 2}`
         }
         style={theme.nodeIconStyle}
       />
     </svg>
-  </div>
-);
+  );
+};
 
 export default Icon;

@@ -5,6 +5,7 @@ import type { Node, TreeNodeProps } from '../types';
 import { hasChildren } from '../util';
 import DefaultIcon from './Icon';
 import DefaultBody from './Body';
+import DefaultCheckbox from './Checkbox';
 import Animated from '../decorators/Animated';
 
 @Animated()
@@ -27,20 +28,42 @@ class TreeNode extends Component<TreeNodeProps> {
             ...(node.selected ? theme.nodeHighlightStyle : {}),
           }}
         >
-          {hasChildren(node) && (
-            <DefaultIcon
-              theme={theme}
-              node={node}
-              onClick={toggle}
-              onKeyPress={onKeyToggle}
-            />
-          )}
-          <DefaultBody
-            theme={theme}
+          <DefaultCheckbox
+            value={node.selected}
             node={node}
-            onClick={select}
+            onChange={select}
             onKeyPress={onKeySelect}
           />
+          {hasChildren(node) && (
+            <span
+              style={theme.nodeIconContainerStyle}
+              onClick={() => toggle(node.id)}
+              onKeyPress={e => onKeyToggle(e, node.id)}
+              role="button"
+              tabIndex={0}
+            >
+              <DefaultIcon
+                theme={theme}
+                node={node}
+                onClick={toggle}
+                onKeyPress={onKeyToggle}
+              />
+            </span>
+          )}
+          <span
+            style={theme.nodeBodyStyle}
+            onClick={() => select(node.id)}
+            onKeyPress={e => onKeySelect(e, node.id)}
+            role="button"
+            tabIndex={0}
+          >
+            <DefaultBody
+              theme={theme}
+              node={node}
+              onClick={select}
+              onKeyPress={onKeySelect}
+            />
+          </span>
         </div>
         <span style={theme.listContainerStyle}>
           <ul style={theme.listStyle}>

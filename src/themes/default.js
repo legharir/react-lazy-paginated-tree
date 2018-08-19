@@ -1,8 +1,12 @@
 // @flow
 
+import postcssJs from 'postcss-js';
+import autoprefixer from 'autoprefixer';
 import type { Theme } from '../types';
 
-const theme: Theme = {
+const prefixer = postcssJs.sync([autoprefixer]);
+
+const theme: Theme = prefixer({
   treeStyle: {
     padding: 0,
   },
@@ -10,6 +14,8 @@ const theme: Theme = {
     listStyle: 'none',
   },
   nodeStyle: {
+    display: 'flex',
+    width: '100%',
     padding: 5,
     backgroundColor: '#f3f3f3',
     marginTop: 2,
@@ -26,8 +32,7 @@ const theme: Theme = {
     height: 10,
   },
   nodeBodyStyle: {
-    width: 'calc(100% - 25px)',
-    display: 'inline-block',
+    flex: 1,
     wordWrap: 'break-word',
     paddingLeft: 5,
   },
@@ -36,6 +41,6 @@ const theme: Theme = {
   },
   listContainerStyle: {},
   listStyle: { paddingLeft: 20 },
-};
+});
 
 export default theme;

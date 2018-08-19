@@ -62,6 +62,13 @@ export type IconProps = {
   onKeyPress: Function,
 };
 
+export type CheckboxProps = {
+  value: boolean,
+  node: Node,
+  onChange: Function,
+  onKeyPress: Function,
+};
+
 export type BodyProps = {
   theme: Theme,
   node: Node,
