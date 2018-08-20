@@ -20,6 +20,8 @@ export type Theme = {
   nodeIconStyle: Object,
   nodeBodyStyle: Object,
   nodeHighlightStyle: Object,
+  expanderStyle: Object,
+  expanderIconStyle: Object,
 };
 
 export type Cache = Object;
@@ -41,6 +43,7 @@ export type TreeProps = {
   Icon?: any,
   Checkbox?: any,
   Body?: any,
+  Expander?: any,
   toggle?: Function,
   onKeyToggle?: Function,
   select?: Function,
@@ -56,6 +59,7 @@ export type TreeNodeProps = {
   Icon: any,
   Checkbox: any,
   Body: any,
+  Expander: any,
   toggle: Function,
   onKeyToggle: Function,
   select: Function,
@@ -78,6 +82,13 @@ export type CheckboxProps = {
 };
 
 export type BodyProps = {
+  theme: Theme,
+  node: Node,
+  onClick: Function,
+  onKeyPress: Function,
+};
+
+export type ExpanderProps = {
   theme: Theme,
   node: Node,
   onClick: Function,

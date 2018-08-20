@@ -11,6 +11,7 @@ import DefaultListItem from './ListItem';
 import DefaultIcon from './Icon';
 import DefaultCheckbox from './Checkbox';
 import DefaultBody from './Body';
+import DefaultExpander from './Expander';
 
 class Tree extends Component<TreeProps, TreeState> {
   constructor(props: TreeProps) {
@@ -75,6 +76,7 @@ class Tree extends Component<TreeProps, TreeState> {
       Icon,
       Checkbox,
       Body,
+      Expander,
     } = this.props;
     return (
       <ul style={{ ...theme.treeStyle, ...style }}>
@@ -92,6 +94,7 @@ class Tree extends Component<TreeProps, TreeState> {
             Icon={Icon || DefaultIcon}
             Checkbox={Checkbox || DefaultCheckbox}
             Body={Body || DefaultBody}
+            Expander={Expander || DefaultExpander}
           />
         ))}
       </ul>

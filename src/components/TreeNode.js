@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import type { Node, TreeNodeProps } from '../types';
-import { hasChildren } from '../util';
+import { hasChildren, shouldShowMore } from '../util';
 
 class TreeNode extends Component<TreeNodeProps> {
   render() {
@@ -19,6 +19,7 @@ class TreeNode extends Component<TreeNodeProps> {
       Icon,
       Checkbox,
       Body,
+      Expander,
     } = this.props;
 
     let children = [];
@@ -37,6 +38,7 @@ class TreeNode extends Component<TreeNodeProps> {
           Icon={Icon}
           Checkbox={Checkbox}
           Body={Body}
+          Expander={Expander}
         />
       ));
     }
@@ -72,11 +74,17 @@ class TreeNode extends Component<TreeNodeProps> {
             transitionEnterTimeout={200}
             transitionLeaveTimeout={200}
           >
-            {children && (
+            {children.length > 0 && (
               <div key={children.length}>
                 {children}
-                {children.length > 0 &&
-                  node.children.length < node.numChildren && <div>BOOP</div>}
+                {shouldShowMore(node) && (
+                  <Expander
+                    theme={theme}
+                    node={node}
+                    onClick={() => {}}
+                    onKeyPress={() => {}}
+                  />
+                )}
               </div>
             )}
           </ReactCSSTransitionGroup>

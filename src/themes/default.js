@@ -35,6 +35,12 @@ const theme: Theme = prefixer({
   },
   listContainerStyle: {},
   listStyle: { paddingLeft: '20px' },
+  expanderStyle: {
+    textAlign: 'right',
+    fontSize: '0.8em',
+    paddingRight: '10px',
+    cursor: 'pointer',
+  },
 });
 
 export default theme;

@@ -25,3 +25,6 @@ export const hasChildren = (node: Node): boolean => node.numChildren > 0;
 
 export const isFullyFetched = (node: Node): boolean =>
   node.children.length === node.numChildren;
+
+export const shouldShowMore = (node: Node): boolean =>
+  node.children.length < node.numChildren;
