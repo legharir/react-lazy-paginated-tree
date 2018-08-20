@@ -70,7 +70,7 @@ class TreeNode extends Component<TreeNodeProps> {
           <ReactCSSTransitionGroup
             transitionName="slide"
             transitionEnterTimeout={200}
-            transitionLeaveTimeout={100}
+            transitionLeaveTimeout={200}
           >
             {children}
           </ReactCSSTransitionGroup>

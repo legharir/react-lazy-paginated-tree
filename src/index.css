@@ -101,6 +101,6 @@
 }
 .slide-leave {
   animation-name: slideUp;
-  animation-duration: 0.1s;
+  animation-duration: 0.2s;
   animation-fill-mode: forwards;
 }
