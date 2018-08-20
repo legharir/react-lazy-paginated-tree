@@ -72,7 +72,13 @@ class TreeNode extends Component<TreeNodeProps> {
             transitionEnterTimeout={200}
             transitionLeaveTimeout={200}
           >
-            {children && <div key={children.length}>{children}</div>}
+            {children && (
+              <div key={children.length}>
+                {children}
+                {children.length > 0 &&
+                  node.children.length < node.numChildren && <div>BOOP</div>}
+              </div>
+            )}
           </ReactCSSTransitionGroup>
         </List>
       </React.Fragment>

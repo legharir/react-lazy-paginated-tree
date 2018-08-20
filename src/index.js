@@ -69,6 +69,7 @@ const transform = (response: Array<Object>): Array<Node> => {
       description: alias,
       children: [],
       numChildren,
+      page: 1,
       expanded: false,
       selected: false,
     };
@@ -77,12 +78,12 @@ const transform = (response: Array<Object>): Array<Node> => {
   return parsedResponse;
 };
 
-const loadChildren = node => {
-  const { id } = node;
+const loadChildren = (node: Node, pageLimit: number) => {
+  const { id, page } = node;
   // make request
   return axios({
     method: 'get',
-    url: `https://mdo.vena.io/api/models/643944054354083840/dimensions/1/members/${id}/children?limit=500&page=1&_=1534781755460`,
+    url: `https://mdo.vena.io/api/models/643944054354083840/dimensions/1/members/${id}/children?limit=${pageLimit}&page=${page}&_=1534781755460`,
     headers: {
       Authorization:
         'VenaBasic NTEyMDIwMDE5MzEyMzI4NzA0LjUxMjAxOTA2NzQ2OTU2MTg1Njo2MjhhNjRhZDJjMTc0NTM1YWI4M2I3NjA1ZmRiMmJkMw==',
@@ -101,26 +102,23 @@ axios({
       'VenaBasic NTEyMDIwMDE5MzEyMzI4NzA0LjUxMjAxOTA2NzQ2OTU2MTg1Njo2MjhhNjRhZDJjMTc0NTM1YWI4M2I3NjA1ZmRiMmJkMw==',
     'Content-Type': 'application/json',
   },
-})
-  .then(response => {
-    const nodes: Array<Node> = transform(response.data);
-    if (api) {
-      render(
-        <ReactLazyPaginatedTree
-          nodes={nodes}
-          loadChildren={loadChildren}
-          ListItem={MUIListItem}
-          Icon={MUIIcon}
-          Checkbox={MUICheckbox}
-          Body={MUIBody}
-        />,
-        api,
-      );
-    }
-  })
-  .catch(error => {
-    console.log(error);
-  });
+}).then(response => {
+  const nodes: Array<Node> = transform(response.data);
+  if (api) {
+    render(
+      <ReactLazyPaginatedTree
+        nodes={nodes}
+        loadChildren={loadChildren}
+        pageLimit={5}
+        ListItem={MUIListItem}
+        Icon={MUIIcon}
+        Checkbox={MUICheckbox}
+        Body={MUIBody}
+      />,
+      api,
+    );
+  }
+});
 
 if (defaultElem && customElem && mui) {
   render(<ReactLazyPaginatedTree nodes={SimpleTree} />, defaultElem);

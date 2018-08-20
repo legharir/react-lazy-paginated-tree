@@ -6,6 +6,7 @@ export type Node = {
   description: string,
   children: Array<Node>,
   numChildren: number,
+  page: number,
   expanded: boolean,
   selected: boolean,
 };
@@ -34,6 +35,7 @@ export type TreeProps = {
   style?: Object,
   nodes: Array<Node>,
   theme?: Theme,
+  pageLimit?: number,
   List?: any,
   ListItem?: any,
   Icon?: any,

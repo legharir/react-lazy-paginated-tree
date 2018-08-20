@@ -22,16 +22,17 @@ class Tree extends Component<TreeProps, TreeState> {
     this.loadChildren = props.loadChildren || this.loadChildren;
   }
 
-  loadChildren = async (node: Node): Promise<Array<Node>> => {
-    console.log(node);
-    return [];
-  };
+  loadChildren = async (
+    node: Node,
+    pageLimit?: number, // eslint-disable-line
+  ): Promise<Array<Node>> => node.children;
 
   toggle = async (nodeId: string): Promise<void> => {
+    const { pageLimit } = this.props;
     const state: TreeState = { ...this.state };
     const node: Node = state.cache[nodeId];
     if (node.children.length === 0 && hasChildren(node)) {
-      const loadedChildren = await this.loadChildren(node);
+      const loadedChildren = await this.loadChildren(node, pageLimit);
       node.children = loadedChildren;
       populateCache(state.cache, loadedChildren);
     }
