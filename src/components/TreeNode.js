@@ -22,7 +22,7 @@ class TreeNode extends Component<TreeNodeProps> {
     } = this.props;
 
     let children = [];
-    if (node.toggled && hasChildren(node)) {
+    if (node.expanded && hasChildren(node)) {
       children = node.children.map((childNode: Node) => (
         <TreeNode
           key={childNode.id}

@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import type { Node, TreeState, TreeProps, Event } from '../types';
-import { populateCache } from '../util';
+import { populateCache, isFullyFetched } from '../util';
 import TreeNode from './TreeNode';
 
 import defaultTheme from '../themes/default';
@@ -19,20 +19,23 @@ class Tree extends Component<TreeProps, TreeState> {
     const { nodes } = props;
     populateCache(cache, nodes);
     this.state = { nodes, cache };
+    this.loadChildren = props.loadChildren || this.loadChildren;
   }
 
-  loadChildren = (nodeId: string): Array<Node> => {
-    console.log(nodeId);
+  loadChildren = async (node: Node): Promise<Array<Node>> => {
+    console.log(node);
     return [];
   };
 
   toggle = async (nodeId: string): Promise<void> => {
     const state: TreeState = { ...this.state };
     const node: Node = state.cache[nodeId];
-    if (!node.fullyFetched) {
-      node.children = await this.loadChildren(nodeId);
+    if (!isFullyFetched(node)) {
+      const loadedChildren = await this.loadChildren(node);
+      node.children = loadedChildren;
+      populateCache(state.cache, loadedChildren);
     }
-    node.toggled = !node.toggled;
+    node.expanded = !node.expanded;
     this.setState(state);
   };
 

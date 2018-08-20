@@ -13,7 +13,7 @@ export const populateCache = (cache: Cache, nodes: Array<Node>): Cache => {
   return cache;
 };
 
-export const hasChildren = (node: Node): boolean =>
-  node.children &&
-  node.children.constructor === Array &&
-  node.children.length > 0;
+export const hasChildren = (node: Node): boolean => node.numChildren > 0;
+
+export const isFullyFetched = (node: Node): boolean =>
+  node.children.length === node.numChildren;

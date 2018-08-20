@@ -1,12 +1,14 @@
 {
   "name": "react-lazy-paginated-tree",
   "version": "0.0.3",
-  "description": "Customizable React Tree-View with Lazy Loading and Pagination",
+  "description":
+    "Customizable React Tree-View with Lazy Loading and Pagination",
   "main": "dist/index.js",
   "dependencies": {
     "@material-ui/core": "^1.5.1",
     "@material-ui/icons": "^2.0.3",
     "autoprefixer": "^9.1.1",
+    "axios": "^0.18.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-polyfill": "^6.26.0",
     "postcss-js": "^2.0.0",
@@ -39,7 +41,8 @@
   },
   "scripts": {
     "watch": "webpack --watch",
-    "start": "webpack --watch & webpack-dev-server --open-page 'index.html'",
+    "start":
+      "webpack --watch & webpack-dev-server --port 8090 --open-page 'index.html'",
     "build": "webpack --config webpack.config.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

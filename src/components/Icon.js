@@ -18,7 +18,7 @@ const Icon = ({ theme, node, onClick, onKeyPress }: IconProps) => {
       <svg height={height} width={height}>
         <polygon
           points={
-            node.toggled
+            node.expanded
               ? `0,0 ${height},0
           ${height / 2},
           ${height}`
