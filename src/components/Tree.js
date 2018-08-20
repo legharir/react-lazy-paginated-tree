@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import type { Node, TreeState, TreeProps, Event } from '../types';
-import { populateCache, isFullyFetched } from '../util';
+import { populateCache, hasChildren } from '../util';
 import TreeNode from './TreeNode';
 
 import defaultTheme from '../themes/default';
@@ -30,7 +30,7 @@ class Tree extends Component<TreeProps, TreeState> {
   toggle = async (nodeId: string): Promise<void> => {
     const state: TreeState = { ...this.state };
     const node: Node = state.cache[nodeId];
-    if (!isFullyFetched(node)) {
+    if (node.children.length === 0 && hasChildren(node)) {
       const loadedChildren = await this.loadChildren(node);
       node.children = loadedChildren;
       populateCache(state.cache, loadedChildren);

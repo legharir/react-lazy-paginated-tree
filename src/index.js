@@ -42,7 +42,7 @@ const MUIIcon = props => {
   const { node } = props;
   return (
     <ListItemIcon {...props}>
-      {node.toggled ? <FolderOpen /> : <Folder />}
+      {node.expanded ? <FolderOpen /> : <Folder />}
     </ListItemIcon>
   );
 };
