@@ -5,30 +5,19 @@ import type { Node, TreeState, TreeProps, Event } from '../types';
 import { populateCache } from '../util';
 import TreeNode from './TreeNode';
 
+import DefaultList from './List';
+import DefaultListItem from './ListItem';
+import DefaultIcon from './Icon';
+import DefaultCheckbox from './Checkbox';
+import DefaultBody from './Body';
+
 class Tree extends Component<TreeProps, TreeState> {
   constructor(props: TreeProps) {
     super(props);
     const cache = {};
-    const {
-      nodes,
-      toggle,
-      onKeyToggle,
-      select,
-      onKeySelect,
-      loadChildren,
-    } = props;
+    const { nodes } = props;
     populateCache(cache, nodes);
-
-    this.state = {
-      nodes,
-      cache,
-    };
-
-    this.toggle = toggle || this.toggle;
-    this.onKeyToggle = onKeyToggle || this.onKeyToggle;
-    this.select = select || this.select;
-    this.onKeySelect = onKeySelect || this.onKeySelect;
-    this.loadChildren = loadChildren || this.loadChildren;
+    this.state = { nodes, cache };
   }
 
   loadChildren = (nodeId: string): Array<Node> => {
@@ -66,19 +55,38 @@ class Tree extends Component<TreeProps, TreeState> {
   };
 
   render() {
-    const { nodes, theme, style } = this.props;
+    const {
+      nodes,
+      theme,
+      style,
+      // method overrides
+      toggle,
+      onKeyToggle,
+      select,
+      onKeySelect,
+      // component overrides
+      List,
+      ListItem,
+      Icon,
+      Checkbox,
+      Body,
+    } = this.props;
     return (
       <ul style={{ ...theme.treeStyle, ...style }}>
         {nodes.map((node: Node) => (
           <TreeNode
             key={node.id}
             node={node}
-            depth={1}
             theme={theme}
-            toggle={this.toggle}
-            onKeyToggle={this.onKeyToggle}
-            select={this.select}
-            onKeySelect={this.onKeySelect}
+            toggle={toggle || this.toggle}
+            onKeyToggle={onKeyToggle || this.onKeyToggle}
+            select={select || this.select}
+            onKeySelect={onKeySelect || this.onKeySelect}
+            List={List || DefaultList}
+            ListItem={ListItem || DefaultListItem}
+            Icon={Icon || DefaultIcon}
+            Checkbox={Checkbox || DefaultCheckbox}
+            Body={Body || DefaultBody}
           />
         ))}
       </ul>

@@ -10,9 +10,6 @@ const theme: Theme = prefixer({
   treeStyle: {
     padding: '0',
   },
-  nodeContainerStyle: {
-    listStyle: 'none',
-  },
   nodeStyle: {
     display: 'flex',
     padding: '5px',

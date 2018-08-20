@@ -36,6 +36,11 @@ export type TreeProps = {
   style?: Object,
   nodes: Array<Node>,
   theme: Theme,
+  List?: any,
+  ListItem?: any,
+  Icon?: any,
+  Checkbox?: any,
+  Body?: any,
 
   // optional redux state management overrides
   toggle?: Function,
@@ -48,7 +53,11 @@ export type TreeProps = {
 export type TreeNodeProps = {
   node: Node,
   theme: Theme,
-  depth: number,
+  List: any,
+  ListItem: any,
+  Icon: any,
+  Checkbox: any,
+  Body: any,
   toggle: Function,
   onKeyToggle: Function,
   select: Function,
@@ -74,4 +83,16 @@ export type BodyProps = {
   node: Node,
   onClick: Function,
   onKeyPress: Function,
+};
+
+export type ListItemProps = {
+  theme: Theme,
+  node: Node,
+  children: any,
+};
+
+export type ListProps = {
+  theme: Theme,
+  node: Node,
+  children: any,
 };

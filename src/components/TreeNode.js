@@ -3,9 +3,6 @@
 import React, { Component } from 'react';
 import type { Node, TreeNodeProps } from '../types';
 import { hasChildren } from '../util';
-import DefaultIcon from './Icon';
-import DefaultBody from './Body';
-import DefaultCheckbox from './Checkbox';
 import Animated from '../decorators/Animated';
 
 @Animated()
@@ -13,79 +10,63 @@ class TreeNode extends Component<TreeNodeProps> {
   render() {
     const {
       node,
-      depth,
       theme,
       toggle,
       onKeyToggle,
       select,
       onKeySelect,
+      List,
+      ListItem,
+      Icon,
+      Checkbox,
+      Body,
     } = this.props;
     return (
-      <li style={theme.nodeContainerStyle}>
-        <div
-          style={{
-            ...theme.nodeStyle,
-            ...(node.selected ? theme.nodeHighlightStyle : {}),
-          }}
+      <React.Fragment>
+        <ListItem
+          theme={theme}
+          node={node}
+          onClick={() => select(node.id)}
+          onKeyPress={e => onKeySelect(e, node.id)}
         >
-          {hasChildren(node) ? (
-            <span
-              style={theme.nodeIconContainerStyle}
-              onClick={() => toggle(node.id)}
-              onKeyPress={e => onKeyToggle(e, node.id)}
-              role="button"
-              tabIndex={0}
-            >
-              <DefaultIcon
-                theme={theme}
-                node={node}
-                onClick={toggle}
-                onKeyPress={onKeyToggle}
-              />
-            </span>
-          ) : (
-            <span style={theme.nodeIconContainerStyle} /> /* placeholder */
-          )}
-          <DefaultCheckbox
-            checked={node.selected}
-            node={node}
-            onChange={select}
-            onKeyPress={onKeySelect}
-          />
-          <span
-            style={theme.nodeBodyStyle}
-            onClick={() => select(node.id)}
-            onKeyPress={e => onKeySelect(e, node.id)}
-            role="button"
-            tabIndex={0}
-          >
-            <DefaultBody
+          {hasChildren(node) && (
+            <Icon
               theme={theme}
               node={node}
-              onClick={select}
-              onKeyPress={onKeySelect}
+              onClick={e => {
+                e.stopPropagation();
+                return toggle(node.id);
+              }}
+              onKeyPress={e => {
+                e.stopPropagation();
+                return onKeyToggle(e, node.id);
+              }}
             />
-          </span>
-        </div>
-        <span style={theme.listContainerStyle}>
-          <ul style={theme.listStyle}>
-            {node.toggled &&
-              hasChildren(node) &&
-              node.children.map((childNode: Node) => (
-                <TreeNode
-                  key={childNode.id}
-                  node={childNode}
-                  depth={depth + 1}
-                  theme={theme}
-                  toggle={toggle}
-                  onKeyToggle={onKeyToggle}
-                  select={select}
-                  onKeySelect={onKeySelect}
-                />
-              ))}
-          </ul>
-        </span>
-      </li>
+          )}
+          <Checkbox theme={theme} node={node} checked={node.selected} />
+          <Body theme={theme} node={node} />
+        </ListItem>
+        <List theme={theme}>
+          {node.toggled &&
+            hasChildren(node) &&
+            node.children.map((childNode: Node) => (
+              <TreeNode
+                key={childNode.id}
+                node={childNode}
+                theme={theme}
+                toggle={toggle}
+                onKeyToggle={onKeyToggle}
+                select={select}
+                onKeySelect={onKeySelect}
+                List={List}
+                ListItem={ListItem}
+                Icon={Icon}
+                Checkbox={Checkbox}
+                Body={Body}
+              />
+            ))}
+        </List>
+      </React.Fragment>
     );
   }
 }
