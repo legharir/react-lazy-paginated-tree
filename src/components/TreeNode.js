@@ -1,11 +1,10 @@
 // @flow
 
 import React, { Component } from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import type { Node, TreeNodeProps } from '../types';
 import { hasChildren } from '../util';
-import Animated from '../decorators/Animated';
 
-@Animated()
 class TreeNode extends Component<TreeNodeProps> {
   render() {
     const {
@@ -21,6 +20,27 @@ class TreeNode extends Component<TreeNodeProps> {
       Checkbox,
       Body,
     } = this.props;
+
+    let children = [];
+    if (node.toggled && hasChildren(node)) {
+      children = node.children.map((childNode: Node) => (
+        <TreeNode
+          key={childNode.id}
+          node={childNode}
+          theme={theme}
+          toggle={toggle}
+          onKeyToggle={onKeyToggle}
+          select={select}
+          onKeySelect={onKeySelect}
+          List={List}
+          ListItem={ListItem}
+          Icon={Icon}
+          Checkbox={Checkbox}
+          Body={Body}
+        />
+      ));
+    }
+
     return (
       <React.Fragment>
         <ListItem
@@ -47,24 +67,13 @@ class TreeNode extends Component<TreeNodeProps> {
           <Body theme={theme} node={node} />
         </ListItem>
         <List theme={theme}>
-          {node.toggled &&
-            hasChildren(node) &&
-            node.children.map((childNode: Node) => (
-              <TreeNode
-                key={childNode.id}
-                node={childNode}
-                theme={theme}
-                toggle={toggle}
-                onKeyToggle={onKeyToggle}
-                select={select}
-                onKeySelect={onKeySelect}
-                List={List}
-                ListItem={ListItem}
-                Icon={Icon}
-                Checkbox={Checkbox}
-                Body={Body}
-              />
-            ))}
+          <ReactCSSTransitionGroup
+            transitionName="slide"
+            transitionEnterTimeout={200}
+            transitionLeaveTimeout={100}
+          >
+            {children}
+          </ReactCSSTransitionGroup>
         </List>
       </React.Fragment>
     );

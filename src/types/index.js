@@ -15,7 +15,6 @@ export type Theme = {
   treeStyle: Object,
   listContainerStyle: Object,
   listStyle: Object,
-  nodeContainerStyle: Object,
   nodeStyle: Object,
   nodeIconContainerStyle: Object,
   nodeIconStyle: Object,
@@ -35,14 +34,12 @@ export type TreeState = {
 export type TreeProps = {
   style?: Object,
   nodes: Array<Node>,
-  theme: Theme,
+  theme?: Theme,
   List?: any,
   ListItem?: any,
   Icon?: any,
   Checkbox?: any,
   Body?: any,
-
-  // optional redux state management overrides
   toggle?: Function,
   onKeyToggle?: Function,
   select?: Function,
@@ -73,6 +70,7 @@ export type IconProps = {
 
 export type CheckboxProps = {
   checked: boolean,
+  theme: Theme,
   node: Node,
   onChange: Function,
   onKeyPress: Function,

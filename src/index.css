@@ -1,0 +1,106 @@
+@-webkit-keyframes slideDown {
+  from {
+    transform: scaleY(0);
+    transform-origin: top;
+    opacity: 0;
+  }
+  to {
+    transform: scaleY(1);
+    transform-origin: top;
+    opacity: 1;
+  }
+}
+@-moz-keyframes slideDown {
+  from {
+    transform: scaleY(0);
+    transform-origin: top;
+    opacity: 0;
+  }
+  to {
+    transform: scaleY(1);
+    transform-origin: top;
+    opacity: 1;
+  }
+}
+@-o-keyframes slideDown {
+  from {
+    transform: scaleY(0);
+    transform-origin: top;
+    opacity: 0;
+  }
+  to {
+    transform: scaleY(1);
+    transform-origin: top;
+    opacity: 1;
+  }
+}
+@keyframes slideDown {
+  from {
+    transform: scaleY(0);
+    transform-origin: top;
+    opacity: 0;
+  }
+  to {
+    transform: scaleY(1);
+    transform-origin: top;
+    opacity: 1;
+  }
+}
+@-webkit-keyframes slideUp {
+  from {
+    transform: scaleY(1);
+    transform-origin: top;
+    opacity: 1;
+  }
+  to {
+    transform: scaleY(0);
+    transform-origin: top;
+    opacity: 0;
+  }
+}
+@-moz-keyframes slideUp {
+  from {
+    transform: scaleY(1);
+    transform-origin: top;
+    opacity: 1;
+  }
+  to {
+    transform: scaleY(0);
+    transform-origin: top;
+    opacity: 0;
+  }
+}
+@-o-keyframes slideUp {
+  from {
+    transform: scaleY(1);
+    transform-origin: top;
+    opacity: 1;
+  }
+  to {
+    transform: scaleY(0);
+    transform-origin: top;
+    opacity: 0;
+  }
+}
+@keyframes slideUp {
+  from {
+    transform: scaleY(1);
+    transform-origin: top;
+    opacity: 1;
+  }
+  to {
+    transform: scaleY(0);
+    transform-origin: top;
+    opacity: 0;
+  }
+}
+.slide-enter {
+  animation-name: slideDown;
+  animation-duration: 0.2s;
+  animation-fill-mode: forwards;
+}
+.slide-leave {
+  animation-name: slideUp;
+  animation-duration: 0.1s;
+  animation-fill-mode: forwards;
+}

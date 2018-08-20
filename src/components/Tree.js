@@ -5,6 +5,7 @@ import type { Node, TreeState, TreeProps, Event } from '../types';
 import { populateCache } from '../util';
 import TreeNode from './TreeNode';
 
+import defaultTheme from '../themes/default';
 import DefaultList from './List';
 import DefaultListItem from './ListItem';
 import DefaultIcon from './Icon';
@@ -57,7 +58,7 @@ class Tree extends Component<TreeProps, TreeState> {
   render() {
     const {
       nodes,
-      theme,
+      theme = defaultTheme,
       style,
       // method overrides
       toggle,

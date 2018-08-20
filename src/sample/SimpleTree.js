@@ -30,7 +30,7 @@ export default [
           },
         ],
         fullyFetched: true,
-        toggled: true,
+        toggled: false,
         selected: false,
       },
       {

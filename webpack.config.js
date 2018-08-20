@@ -13,7 +13,7 @@ module.exports = {
     // libraryTarget: 'umd',
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx', '.css'],
   },
   module: {
     rules: [
@@ -35,9 +35,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: {
-          loader: 'css-loader',
-        },
+        use: ['style-loader', 'css-loader'],
       },
     ],
   },

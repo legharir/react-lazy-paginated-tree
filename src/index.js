@@ -1,5 +1,7 @@
 // @flow
 
+import './index.css';
+
 import React from 'react'; // eslint-disable-line
 import { render } from 'react-dom';
 import ListItem from '@material-ui/core/ListItem';
@@ -9,7 +11,6 @@ import Folder from '@material-ui/icons/Folder';
 import FolderOpen from '@material-ui/icons/FolderOpen';
 import Checkbox from '@material-ui/core/Checkbox';
 import ReactLazyPaginatedTree from './components/Tree';
-import DefaultTheme from './themes/default';
 import DarkTheme from './themes/dark';
 import SimpleTree from './sample/SimpleTree';
 import SimpleTreeTwo from './sample/SimpleTreeTwo';
@@ -52,10 +53,7 @@ const MUICheckbox = props => {
 };
 
 if (defaultElem && customElem && mui) {
-  render(
-    <ReactLazyPaginatedTree nodes={SimpleTree} theme={DefaultTheme} />,
-    defaultElem,
-  );
+  render(<ReactLazyPaginatedTree nodes={SimpleTree} />, defaultElem);
   render(
     <ReactLazyPaginatedTree nodes={SimpleTreeTwo} theme={DarkTheme} />,
     customElem,
@@ -63,7 +61,6 @@ if (defaultElem && customElem && mui) {
   render(
     <ReactLazyPaginatedTree
       nodes={SimpleTreeThree}
-      theme={DefaultTheme}
       ListItem={MUIListItem}
       Icon={MUIIcon}
       Checkbox={MUICheckbox}
