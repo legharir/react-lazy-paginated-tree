@@ -3,12 +3,12 @@
 import React, { Component } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import type { Node, TreeNodeProps, TreeNodeState } from '../types';
-import { hasChildren, shouldShowMore } from '../util';
+import { hasChildren, hasLoadedChildren, shouldShowMore } from '../util';
 
 class TreeNode extends Component<TreeNodeProps, TreeNodeState> {
   state = {
-    expanderDisabled: false,
-    paginatorDisabled: false,
+    expanderLoading: false,
+    paginatorLoading: false,
   };
 
   stopPropagation = (e: Event) => {
@@ -23,9 +23,13 @@ class TreeNode extends Component<TreeNodeProps, TreeNodeState> {
   ) => {
     this.stopPropagation(e);
     if (!disabled) {
-      this.setState({ expanderDisabled: true });
-      await callable(e, node);
-      this.setState({ expanderDisabled: false });
+      if (!node.expanded && !hasLoadedChildren(node)) {
+        this.setState({ expanderLoading: true });
+        await callable(e, node);
+        this.setState({ expanderLoading: false });
+      } else {
+        await callable(e, node);
+      }
     }
   };
 
@@ -36,9 +40,9 @@ class TreeNode extends Component<TreeNodeProps, TreeNodeState> {
     disabled: boolean,
   ) => {
     if (!disabled) {
-      this.setState({ paginatorDisabled: true });
+      this.setState({ paginatorLoading: true });
       await callable(e, node);
-      this.setState({ paginatorDisabled: false });
+      this.setState({ paginatorLoading: false });
     }
   };
 
@@ -58,9 +62,10 @@ class TreeNode extends Component<TreeNodeProps, TreeNodeState> {
       Checkbox,
       Body,
       Paginator,
+      Loading,
     }: TreeNodeProps = this.props;
 
-    const { expanderDisabled, paginatorDisabled } = this.state;
+    const { expanderLoading, paginatorLoading } = this.state;
 
     let children = [];
     if (node.expanded && hasChildren(node)) {
@@ -81,6 +86,7 @@ class TreeNode extends Component<TreeNodeProps, TreeNodeState> {
           Checkbox={Checkbox}
           Body={Body}
           Paginator={Paginator}
+          Loading={Loading}
         />
       ));
     }
@@ -97,11 +103,9 @@ class TreeNode extends Component<TreeNodeProps, TreeNodeState> {
             <Expander
               theme={theme}
               node={node}
-              onClick={e =>
-                this.handleToggle(e, node, toggle, expanderDisabled)
-              }
+              onClick={e => this.handleToggle(e, node, toggle, expanderLoading)}
               onKeyPress={e =>
-                this.handleToggle(e, node, onKeyToggle, expanderDisabled)
+                this.handleToggle(e, node, onKeyToggle, expanderLoading)
               }
             />
           )}
@@ -114,26 +118,29 @@ class TreeNode extends Component<TreeNodeProps, TreeNodeState> {
             transitionEnterTimeout={200}
             transitionLeaveTimeout={200}
           >
+            {expanderLoading && <Loading theme={theme} node={node} />}
             {children.length > 0 && (
               <div key={node.id}>
                 {children}
-                {shouldShowMore(node) && (
-                  <Paginator
-                    theme={theme}
-                    node={node}
-                    onClick={e =>
-                      this.handleLoadMore(e, node, loadMore, paginatorDisabled)
-                    }
-                    onKeyPress={e =>
-                      this.handleLoadMore(
-                        e,
-                        node,
-                        onKeyLoadMore,
-                        paginatorDisabled,
-                      )
-                    }
-                  />
-                )}
+                {paginatorLoading && <Loading theme={theme} node={node} />}
+                {!paginatorLoading &&
+                  shouldShowMore(node) && (
+                    <Paginator
+                      theme={theme}
+                      node={node}
+                      onClick={e =>
+                        this.handleLoadMore(e, node, loadMore, paginatorLoading)
+                      }
+                      onKeyPress={e =>
+                        this.handleLoadMore(
+                          e,
+                          node,
+                          onKeyLoadMore,
+                          paginatorLoading,
+                        )
+                      }
+                    />
+                  )}
               </div>
             )}
           </ReactCSSTransitionGroup>

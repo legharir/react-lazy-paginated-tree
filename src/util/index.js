@@ -21,6 +21,9 @@ export const populateCache = (
   return cache;
 };
 
+export const hasLoadedChildren = (node: Node): boolean =>
+  node.children.length > 0;
+
 export const hasChildren = (node: Node): boolean => node.numChildren > 0;
 
 export const isFullyFetched = (node: Node): boolean =>

@@ -2,15 +2,15 @@ const path = require('path');
 
 module.exports = {
   mode: 'development',
-  entry: ['babel-polyfill', './src/index.js'],
+  entry: ['./src/index.js'],
   devServer: {
     contentBase: './dist',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'index.js',
-    // library: 'react-lazy-paginated-tree',
-    // libraryTarget: 'umd',
+    library: 'react-lazy-paginated-tree',
+    libraryTarget: 'umd',
   },
   resolve: {
     extensions: ['.js', '.jsx', '.css'],

@@ -43,6 +43,11 @@ const theme: Theme = prefixer({
     paddingLeft: '30px',
     cursor: 'pointer',
   },
+  loadingStyle: {
+    textAlign: 'left',
+    fontSize: '0.8em',
+    paddingLeft: '30px',
+  },
 });
 
 export default theme;

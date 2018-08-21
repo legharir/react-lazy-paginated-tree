@@ -22,6 +22,7 @@ export type Theme = {
   nodeHighlightStyle: Object,
   expanderStyle: Object,
   expanderIconStyle: Object,
+  loadingStyle: Object,
 };
 
 export type Cache = Object;
@@ -43,6 +44,7 @@ export type TreeProps = {
   Checkbox?: any,
   Body?: any,
   Paginator?: any,
+  Loading?: any,
   toggle?: Function,
   onKeyToggle?: Function,
   select?: Function,
@@ -59,6 +61,7 @@ export type TreeNodeProps = {
   Checkbox: any,
   Body: any,
   Paginator: any,
+  Loading: any,
   loadMore: Function,
   onKeyLoadMore: Function,
   toggle: Function,
@@ -68,15 +71,8 @@ export type TreeNodeProps = {
 };
 
 export type TreeNodeState = {
-  expanderDisabled: boolean,
-  paginatorDisabled: boolean,
-};
-
-export type IconProps = {
-  theme: Theme,
-  node: Node,
-  onClick: Function,
-  onKeyPress: Function,
+  expanderLoading: boolean,
+  paginatorLoading: boolean,
 };
 
 export type CheckboxProps = {
@@ -111,4 +107,9 @@ export type ListProps = {
   theme: Theme,
   node: Node,
   children: any,
+};
+
+export type LoadingProps = {
+  theme: Theme,
+  node: Node,
 };

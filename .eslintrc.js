@@ -19,5 +19,6 @@ module.exports = {
     'arrow-parens': 0,
     'implicit-arrow-linebreak': 0,
     'import/prefer-default-export': 0,
+    indent: 0,
   },
 };

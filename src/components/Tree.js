@@ -12,6 +12,7 @@ import DefaultExpander from './Expander';
 import DefaultCheckbox from './Checkbox';
 import DefaultBody from './Body';
 import DefaultPaginator from './Paginator';
+import DefaultLoading from './Loading';
 
 class Tree extends Component<TreeProps, TreeState> {
   constructor(props: TreeProps) {
@@ -90,6 +91,7 @@ class Tree extends Component<TreeProps, TreeState> {
       Checkbox,
       Body,
       Paginator,
+      Loading,
     } = this.props;
     return (
       <ul style={{ ...theme.treeStyle, ...style }}>
@@ -110,6 +112,7 @@ class Tree extends Component<TreeProps, TreeState> {
             Checkbox={Checkbox || DefaultCheckbox}
             Body={Body || DefaultBody}
             Paginator={Paginator || DefaultPaginator}
+            Loading={Loading || DefaultLoading}
           />
         ))}
       </ul>
