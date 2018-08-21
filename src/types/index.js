@@ -39,10 +39,10 @@ export type TreeProps = {
   pageLimit?: number,
   List?: any,
   ListItem?: any,
-  Icon?: any,
+  Expander?: any,
   Checkbox?: any,
   Body?: any,
-  Expander?: any,
+  Paginator?: any,
   toggle?: Function,
   onKeyToggle?: Function,
   select?: Function,
@@ -55,16 +55,21 @@ export type TreeNodeProps = {
   theme: Theme,
   List: any,
   ListItem: any,
-  Icon: any,
+  Expander: any,
   Checkbox: any,
   Body: any,
-  Expander: any,
+  Paginator: any,
   loadMore: Function,
   onKeyLoadMore: Function,
   toggle: Function,
   onKeyToggle: Function,
   select: Function,
   onKeySelect: Function,
+};
+
+export type TreeNodeState = {
+  expanderDisabled: boolean,
+  paginatorDisabled: boolean,
 };
 
 export type IconProps = {

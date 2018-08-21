@@ -8,10 +8,10 @@ import TreeNode from './TreeNode';
 import defaultTheme from '../themes/default';
 import DefaultList from './List';
 import DefaultListItem from './ListItem';
-import DefaultIcon from './Icon';
+import DefaultExpander from './Expander';
 import DefaultCheckbox from './Checkbox';
 import DefaultBody from './Body';
-import DefaultExpander from './Expander';
+import DefaultPaginator from './Paginator';
 
 class Tree extends Component<TreeProps, TreeState> {
   constructor(props: TreeProps) {
@@ -86,10 +86,10 @@ class Tree extends Component<TreeProps, TreeState> {
       // component overrides
       List,
       ListItem,
-      Icon,
+      Expander,
       Checkbox,
       Body,
-      Expander,
+      Paginator,
     } = this.props;
     return (
       <ul style={{ ...theme.treeStyle, ...style }}>
@@ -106,10 +106,10 @@ class Tree extends Component<TreeProps, TreeState> {
             onKeySelect={onKeySelect || this.onKeySelect}
             List={List || DefaultList}
             ListItem={ListItem || DefaultListItem}
-            Icon={Icon || DefaultIcon}
+            Expander={Expander || DefaultExpander}
             Checkbox={Checkbox || DefaultCheckbox}
             Body={Body || DefaultBody}
-            Expander={Expander || DefaultExpander}
+            Paginator={Paginator || DefaultPaginator}
           />
         ))}
       </ul>

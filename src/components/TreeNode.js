@@ -2,10 +2,15 @@
 
 import React, { Component } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import type { Node, TreeNodeProps } from '../types';
+import type { Node, TreeNodeProps, TreeNodeState } from '../types';
 import { hasChildren, shouldShowMore } from '../util';
 
-class TreeNode extends Component<TreeNodeProps> {
+class TreeNode extends Component<TreeNodeProps, TreeNodeState> {
+  state = {
+    expanderDisabled: false,
+    paginatorDisabled: false,
+  };
+
   render() {
     const {
       node,
@@ -18,11 +23,13 @@ class TreeNode extends Component<TreeNodeProps> {
       onKeySelect,
       List,
       ListItem,
-      Icon,
+      Expander,
       Checkbox,
       Body,
-      Expander,
+      Paginator,
     }: TreeNodeProps = this.props;
+
+    const { expanderDisabled, paginatorDisabled } = this.state;
 
     let children = [];
     if (node.expanded && hasChildren(node)) {
@@ -39,10 +46,10 @@ class TreeNode extends Component<TreeNodeProps> {
           onKeySelect={onKeySelect}
           List={List}
           ListItem={ListItem}
-          Icon={Icon}
+          Expander={Expander}
           Checkbox={Checkbox}
           Body={Body}
-          Expander={Expander}
+          Paginator={Paginator}
         />
       ));
     }
@@ -56,7 +63,8 @@ class TreeNode extends Component<TreeNodeProps> {
           onKeyPress={e => onKeySelect(e, node)}
         >
           {hasChildren(node) && (
-            <Icon
+            <Expander
+              disabled={expanderDisabled}
               theme={theme}
               node={node}
               onClick={e => {
@@ -82,7 +90,8 @@ class TreeNode extends Component<TreeNodeProps> {
               <div key={node.id}>
                 {children}
                 {shouldShowMore(node) && (
-                  <Expander
+                  <Paginator
+                    disabled={paginatorDisabled}
                     theme={theme}
                     node={node}
                     onClick={() => loadMore(node)}

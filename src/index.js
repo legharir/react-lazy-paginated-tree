@@ -111,7 +111,7 @@ axios({
         loadChildren={loadChildren}
         pageLimit={5}
         ListItem={MUIListItem}
-        Icon={MUIIcon}
+        Expander={MUIIcon}
         Checkbox={MUICheckbox}
         Body={MUIBody}
       />,
@@ -130,7 +130,7 @@ if (defaultElem && customElem && mui) {
     <ReactLazyPaginatedTree
       nodes={SimpleTreeThree}
       ListItem={MUIListItem}
-      Icon={MUIIcon}
+      Expander={MUIIcon}
       Checkbox={MUICheckbox}
       Body={MUIBody}
     />,
