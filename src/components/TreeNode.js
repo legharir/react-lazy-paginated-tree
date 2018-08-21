@@ -10,6 +10,8 @@ class TreeNode extends Component<TreeNodeProps> {
     const {
       node,
       theme,
+      loadMore,
+      onKeyLoadMore,
       toggle,
       onKeyToggle,
       select,
@@ -20,7 +22,7 @@ class TreeNode extends Component<TreeNodeProps> {
       Checkbox,
       Body,
       Expander,
-    } = this.props;
+    }: TreeNodeProps = this.props;
 
     let children = [];
     if (node.expanded && hasChildren(node)) {
@@ -29,6 +31,8 @@ class TreeNode extends Component<TreeNodeProps> {
           key={childNode.id}
           node={childNode}
           theme={theme}
+          loadMore={loadMore}
+          onKeyLoadMore={onKeyLoadMore}
           toggle={toggle}
           onKeyToggle={onKeyToggle}
           select={select}
@@ -48,8 +52,8 @@ class TreeNode extends Component<TreeNodeProps> {
         <ListItem
           theme={theme}
           node={node}
-          onClick={() => select(node.id)}
-          onKeyPress={e => onKeySelect(e, node.id)}
+          onClick={() => select(node)}
+          onKeyPress={e => onKeySelect(e, node)}
         >
           {hasChildren(node) && (
             <Icon
@@ -57,11 +61,11 @@ class TreeNode extends Component<TreeNodeProps> {
               node={node}
               onClick={e => {
                 e.stopPropagation();
-                return toggle(node.id);
+                return toggle(node);
               }}
               onKeyPress={e => {
                 e.stopPropagation();
-                return onKeyToggle(e, node.id);
+                return onKeyToggle(e, node);
               }}
             />
           )}
@@ -75,14 +79,14 @@ class TreeNode extends Component<TreeNodeProps> {
             transitionLeaveTimeout={200}
           >
             {children.length > 0 && (
-              <div key={children.length}>
+              <div key={node.id}>
                 {children}
                 {shouldShowMore(node) && (
                   <Expander
                     theme={theme}
                     node={node}
-                    onClick={() => {}}
-                    onKeyPress={() => {}}
+                    onClick={() => loadMore(node)}
+                    onKeyPress={e => onKeyLoadMore(e, node)}
                   />
                 )}
               </div>

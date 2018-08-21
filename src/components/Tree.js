@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import type { Node, TreeState, TreeProps, Event } from '../types';
-import { populateCache, hasChildren } from '../util';
+import { hasChildren, isFullyFetched } from '../util';
 import TreeNode from './TreeNode';
 
 import defaultTheme from '../themes/default';
@@ -16,10 +16,8 @@ import DefaultExpander from './Expander';
 class Tree extends Component<TreeProps, TreeState> {
   constructor(props: TreeProps) {
     super(props);
-    const cache = {};
     const { nodes } = props;
-    populateCache(cache, nodes);
-    this.state = { nodes, cache };
+    this.state = { nodes };
     this.loadChildren = props.loadChildren || this.loadChildren;
   }
 
@@ -28,35 +26,50 @@ class Tree extends Component<TreeProps, TreeState> {
     pageLimit?: number, // eslint-disable-line
   ): Promise<Array<Node>> => node.children;
 
-  toggle = async (nodeId: string): Promise<void> => {
+  loadMore = async (node: Node) => {
     const { pageLimit } = this.props;
     const state: TreeState = { ...this.state };
-    const node: Node = state.cache[nodeId];
+    if (!isFullyFetched(node)) {
+      node.page += 1;
+      const loadedChildren = await this.loadChildren(node, pageLimit);
+      node.children = node.children.concat(loadedChildren);
+    }
+    this.setState(state);
+  };
+
+  onKeyLoadMore = async (e: Event, node: Node): Promise<void> => {
+    if (e.key === 'Enter') {
+      await this.loadMore(node);
+    }
+  };
+
+  toggle = async (node: Node): Promise<void> => {
+    const { pageLimit } = this.props;
+    const state: TreeState = { ...this.state };
     if (node.children.length === 0 && hasChildren(node)) {
+      node.page += 1;
       const loadedChildren = await this.loadChildren(node, pageLimit);
       node.children = loadedChildren;
-      populateCache(state.cache, loadedChildren);
     }
     node.expanded = !node.expanded;
     this.setState(state);
   };
 
-  onKeyToggle = async (e: Event, nodeId: string): Promise<void> => {
+  onKeyToggle = async (e: Event, node: Node): Promise<void> => {
     if (e.key === 'Enter') {
-      await this.toggle(nodeId);
+      await this.toggle(node);
     }
   };
 
-  select = (nodeId: string): void => {
+  select = (node: Node): void => {
     const state: TreeState = { ...this.state };
-    const node: Node = state.cache[nodeId];
     node.selected = !node.selected;
     this.setState(state);
   };
 
-  onKeySelect = (e: Event, nodeId: string): void => {
+  onKeySelect = (e: Event, node: Node): void => {
     if (e.key === 'Enter') {
-      this.select(nodeId);
+      this.select(node);
     }
   };
 
@@ -85,6 +98,8 @@ class Tree extends Component<TreeProps, TreeState> {
             key={node.id}
             node={node}
             theme={theme}
+            loadMore={this.loadMore}
+            onKeyLoadMore={this.onKeyLoadMore}
             toggle={toggle || this.toggle}
             onKeyToggle={onKeyToggle || this.onKeyToggle}
             select={select || this.select}

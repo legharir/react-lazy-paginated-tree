@@ -69,7 +69,7 @@ const transform = (response: Array<Object>): Array<Node> => {
       description: alias,
       children: [],
       numChildren,
-      page: 1,
+      page: 0,
       expanded: false,
       selected: false,
     };

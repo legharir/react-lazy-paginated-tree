@@ -30,7 +30,6 @@ export type Event = Object;
 
 export type TreeState = {
   nodes: Array<Node>,
-  cache: Cache,
 };
 
 export type TreeProps = {
@@ -60,6 +59,8 @@ export type TreeNodeProps = {
   Checkbox: any,
   Body: any,
   Expander: any,
+  loadMore: Function,
+  onKeyLoadMore: Function,
   toggle: Function,
   onKeyToggle: Function,
   select: Function,

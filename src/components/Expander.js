@@ -3,7 +3,7 @@
 import React from 'react';
 import type { ExpanderProps } from '../types';
 
-const Body = ({ theme, onClick, onKeyPress }: ExpanderProps) => (
+const Expander = ({ theme, onClick, onKeyPress }: ExpanderProps) => (
   <div
     style={theme.expanderStyle}
     onClick={onClick}
@@ -15,4 +15,4 @@ const Body = ({ theme, onClick, onKeyPress }: ExpanderProps) => (
   </div>
 );
 
-export default Body;
+export default Expander;
