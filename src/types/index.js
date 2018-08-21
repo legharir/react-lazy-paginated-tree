@@ -38,6 +38,7 @@ export type TreeProps = {
   nodes: Array<Node>,
   theme?: Theme,
   pageLimit?: number,
+  indentWidth?: number,
   List?: any,
   ListItem?: any,
   Expander?: any,
@@ -45,6 +46,7 @@ export type TreeProps = {
   Body?: any,
   Paginator?: any,
   Loading?: any,
+  DepthPadding?: any,
   toggle?: Function,
   onKeyToggle?: Function,
   select?: Function,
@@ -53,8 +55,10 @@ export type TreeProps = {
 };
 
 export type TreeNodeProps = {
+  depth: number,
   node: Node,
   theme: Theme,
+  indentWidth: number,
   List: any,
   ListItem: any,
   Expander: any,
@@ -62,6 +66,7 @@ export type TreeNodeProps = {
   Body: any,
   Paginator: any,
   Loading: any,
+  DepthPadding: any,
   loadMore: Function,
   onKeyLoadMore: Function,
   toggle: Function,
@@ -112,4 +117,10 @@ export type ListProps = {
 export type LoadingProps = {
   theme: Theme,
   node: Node,
+};
+
+export type DepthPaddingProps = {
+  indentWidth: number,
+  depth: number,
+  children: any,
 };

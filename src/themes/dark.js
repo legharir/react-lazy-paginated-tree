@@ -36,17 +36,15 @@ const theme: Theme = prefixer({
     backgroundColor: 'black',
   },
   listContainerStyle: {},
-  listStyle: { paddingLeft: '20px' },
+  listStyle: { paddingLeft: '0px' },
   expanderStyle: {
-    textAlign: 'left',
+    textAlign: 'center',
     fontSize: '0.8em',
-    paddingLeft: '30px',
     cursor: 'pointer',
   },
   loadingStyle: {
-    textAlign: 'left',
+    textAlign: 'center',
     fontSize: '0.8em',
-    paddingLeft: '30px',
   },
 });
 

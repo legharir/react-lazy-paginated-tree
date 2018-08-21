@@ -48,8 +48,10 @@ class TreeNode extends Component<TreeNodeProps, TreeNodeState> {
 
   render() {
     const {
+      depth,
       node,
       theme,
+      indentWidth,
       loadMore,
       onKeyLoadMore,
       toggle,
@@ -63,6 +65,7 @@ class TreeNode extends Component<TreeNodeProps, TreeNodeState> {
       Body,
       Paginator,
       Loading,
+      DepthPadding,
     }: TreeNodeProps = this.props;
 
     const { expanderLoading, paginatorLoading } = this.state;
@@ -72,8 +75,10 @@ class TreeNode extends Component<TreeNodeProps, TreeNodeState> {
       children = node.children.map((childNode: Node) => (
         <TreeNode
           key={childNode.id}
+          depth={depth + 1}
           node={childNode}
           theme={theme}
+          indentWidth={indentWidth}
           loadMore={loadMore}
           onKeyLoadMore={onKeyLoadMore}
           toggle={toggle}
@@ -87,10 +92,10 @@ class TreeNode extends Component<TreeNodeProps, TreeNodeState> {
           Body={Body}
           Paginator={Paginator}
           Loading={Loading}
+          DepthPadding={DepthPadding}
         />
       ));
     }
-
     return (
       <React.Fragment>
         <ListItem
@@ -99,6 +104,8 @@ class TreeNode extends Component<TreeNodeProps, TreeNodeState> {
           onClick={e => select(e, node)}
           onKeyPress={e => onKeySelect(e, node)}
         >
+          <Checkbox theme={theme} node={node} checked={node.selected} />
+          <DepthPadding indentWidth={indentWidth} depth={depth} />
           {hasChildren(node) && (
             <Expander
               theme={theme}
@@ -109,7 +116,6 @@ class TreeNode extends Component<TreeNodeProps, TreeNodeState> {
               }
             />
           )}
-          <Checkbox theme={theme} node={node} checked={node.selected} />
           <Body theme={theme} node={node} />
         </ListItem>
         <List theme={theme}>

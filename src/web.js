@@ -1,7 +1,5 @@
 // @flow
 
-import './index.css';
-
 import React from 'react'; // eslint-disable-line
 import { render } from 'react-dom';
 import axios from 'axios';
@@ -79,7 +77,7 @@ const MUIListItem = props => (
 const MUIIcon = props => {
   const { node } = props;
   return (
-    <ListItemIcon {...props}>
+    <ListItemIcon {...props} style={{ marginRight: '0px' }}>
       {node.expanded ? <FolderOpen /> : <Folder />}
     </ListItemIcon>
   );

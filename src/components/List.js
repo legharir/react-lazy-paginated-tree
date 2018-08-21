@@ -4,7 +4,7 @@ import React from 'react';
 import type { ListProps } from '../types';
 
 const List = ({ theme, children }: ListProps) => (
-  <ul style={theme.listStyle}>{children}</ul>
+  <div style={theme.listStyle}>{children}</div>
 );
 
 export default List;

@@ -13,6 +13,12 @@ import DefaultCheckbox from './Checkbox';
 import DefaultBody from './Body';
 import DefaultPaginator from './Paginator';
 import DefaultLoading from './Loading';
+import DefaultDepthPadding from './DepthPadding';
+
+import '../animations/index.css';
+
+const DEFAULT_INDENT_WIDTH = 20;
+const DEFAULT_DEPTH = 0;
 
 class Tree extends Component<TreeProps, TreeState> {
   constructor(props: TreeProps) {
@@ -79,6 +85,7 @@ class Tree extends Component<TreeProps, TreeState> {
       nodes,
       theme = defaultTheme,
       style,
+      indentWidth,
       // method overrides
       toggle,
       onKeyToggle,
@@ -92,14 +99,17 @@ class Tree extends Component<TreeProps, TreeState> {
       Body,
       Paginator,
       Loading,
+      DepthPadding,
     } = this.props;
     return (
       <ul style={{ ...theme.treeStyle, ...style }}>
         {nodes.map((node: Node) => (
           <TreeNode
             key={node.id}
+            depth={DEFAULT_DEPTH}
             node={node}
             theme={theme}
+            indentWidth={indentWidth || DEFAULT_INDENT_WIDTH}
             loadMore={this.loadMore}
             onKeyLoadMore={this.onKeyLoadMore}
             toggle={toggle || this.toggle}
@@ -113,6 +123,7 @@ class Tree extends Component<TreeProps, TreeState> {
             Body={Body || DefaultBody}
             Paginator={Paginator || DefaultPaginator}
             Loading={Loading || DefaultLoading}
+            DepthPadding={DepthPadding || DefaultDepthPadding}
           />
         ))}
       </ul>

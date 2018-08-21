@@ -2,7 +2,5 @@
 
 import { Tree, TreeNode } from './components';
 
-export default {
-  Tree,
-  TreeNode,
-};
+export { Tree, TreeNode };
+export default Tree;
