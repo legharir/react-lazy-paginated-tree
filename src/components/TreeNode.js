@@ -11,6 +11,37 @@ class TreeNode extends Component<TreeNodeProps, TreeNodeState> {
     paginatorDisabled: false,
   };
 
+  stopPropagation = (e: Event) => {
+    e.stopPropagation();
+  };
+
+  handleToggle = async (
+    e: Event,
+    node: Node,
+    callable: Function,
+    disabled: boolean,
+  ) => {
+    this.stopPropagation(e);
+    if (!disabled) {
+      this.setState({ expanderDisabled: true });
+      await callable(e, node);
+      this.setState({ expanderDisabled: false });
+    }
+  };
+
+  handleLoadMore = async (
+    e: Event,
+    node: Node,
+    callable: Function,
+    disabled: boolean,
+  ) => {
+    if (!disabled) {
+      this.setState({ paginatorDisabled: true });
+      await callable(e, node);
+      this.setState({ paginatorDisabled: false });
+    }
+  };
+
   render() {
     const {
       node,
@@ -59,22 +90,19 @@ class TreeNode extends Component<TreeNodeProps, TreeNodeState> {
         <ListItem
           theme={theme}
           node={node}
-          onClick={() => select(node)}
+          onClick={e => select(e, node)}
           onKeyPress={e => onKeySelect(e, node)}
         >
           {hasChildren(node) && (
             <Expander
-              disabled={expanderDisabled}
               theme={theme}
               node={node}
-              onClick={e => {
-                e.stopPropagation();
-                return toggle(node);
-              }}
-              onKeyPress={e => {
-                e.stopPropagation();
-                return onKeyToggle(e, node);
-              }}
+              onClick={e =>
+                this.handleToggle(e, node, toggle, expanderDisabled)
+              }
+              onKeyPress={e =>
+                this.handleToggle(e, node, onKeyToggle, expanderDisabled)
+              }
             />
           )}
           <Checkbox theme={theme} node={node} checked={node.selected} />
@@ -91,11 +119,19 @@ class TreeNode extends Component<TreeNodeProps, TreeNodeState> {
                 {children}
                 {shouldShowMore(node) && (
                   <Paginator
-                    disabled={paginatorDisabled}
                     theme={theme}
                     node={node}
-                    onClick={() => loadMore(node)}
-                    onKeyPress={e => onKeyLoadMore(e, node)}
+                    onClick={e =>
+                      this.handleLoadMore(e, node, loadMore, paginatorDisabled)
+                    }
+                    onKeyPress={e =>
+                      this.handleLoadMore(
+                        e,
+                        node,
+                        onKeyLoadMore,
+                        paginatorDisabled,
+                      )
+                    }
                   />
                 )}
               </div>

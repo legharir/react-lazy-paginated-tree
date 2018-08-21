@@ -22,9 +22,31 @@ import type { Node } from './types';
 const defaultElem = document.getElementById('default');
 const customElem = document.getElementById('custom');
 const mui = document.getElementById('mui');
+const lazyDefault = document.getElementById('lazyDefault');
 const api = document.getElementById('api');
 
 /* MUI COMPONENTS */
+
+const MUIPaginator = ({ theme, node, onClick, onKeyPress }) => (
+  <ListItem
+    button
+    onClick={onClick}
+    onKeyPress={onKeyPress}
+    style={{
+      paddingTop: 0,
+      paddingBottom: 0,
+      color: '#106EBE',
+    }}
+  >
+    <ListItemText
+      style={{
+        textAlign: 'center',
+      }}
+      primary="Load More"
+    />
+  </ListItem>
+);
+
 const MUIListItem = props => (
   <ListItem
     button
@@ -104,6 +126,30 @@ axios({
   },
 }).then(response => {
   const nodes: Array<Node> = transform(response.data);
+  if (lazyDefault) {
+    render(
+      <ReactLazyPaginatedTree
+        nodes={nodes}
+        loadChildren={loadChildren}
+        pageLimit={5}
+      />,
+      lazyDefault,
+    );
+  }
+});
+
+// Make a request for a user with a given ID
+axios({
+  method: 'get',
+  url:
+    'https://mdo.vena.io/api/models/643944054354083840/dimensions/1/members/root/children?_=1534781755460',
+  headers: {
+    Authorization:
+      'VenaBasic NTEyMDIwMDE5MzEyMzI4NzA0LjUxMjAxOTA2NzQ2OTU2MTg1Njo2MjhhNjRhZDJjMTc0NTM1YWI4M2I3NjA1ZmRiMmJkMw==',
+    'Content-Type': 'application/json',
+  },
+}).then(response => {
+  const nodes: Array<Node> = transform(response.data);
   if (api) {
     render(
       <ReactLazyPaginatedTree
@@ -114,6 +160,7 @@ axios({
         Expander={MUIIcon}
         Checkbox={MUICheckbox}
         Body={MUIBody}
+        Paginator={MUIPaginator}
       />,
       api,
     );

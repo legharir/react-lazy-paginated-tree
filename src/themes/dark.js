@@ -38,9 +38,9 @@ const theme: Theme = prefixer({
   listContainerStyle: {},
   listStyle: { paddingLeft: '20px' },
   expanderStyle: {
-    textAlign: 'right',
+    textAlign: 'left',
     fontSize: '0.8em',
-    paddingRight: '10px',
+    paddingLeft: '30px',
     cursor: 'pointer',
   },
 });

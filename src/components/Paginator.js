@@ -11,7 +11,7 @@ const Paginator = ({ theme, onClick, onKeyPress }: ExpanderProps) => (
     role="button"
     tabIndex={0}
   >
-    show more...
+    load more...
   </div>
 );
 

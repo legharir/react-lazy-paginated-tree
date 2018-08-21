@@ -1,11 +1,11 @@
 // @flow
 
 import React from 'react';
-import type { IconProps } from '../types';
+import type { ExpanderProps } from '../types';
 
 const stripPx = val => parseInt(val, 10);
 
-const Expander = ({ theme, node, onClick, onKeyPress }: IconProps) => {
+const Expander = ({ theme, node, onClick, onKeyPress }: ExpanderProps) => {
   const height = stripPx(theme.nodeIconStyle.height);
   return (
     <span

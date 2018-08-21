@@ -26,7 +26,7 @@ class Tree extends Component<TreeProps, TreeState> {
     pageLimit?: number, // eslint-disable-line
   ): Promise<Array<Node>> => node.children;
 
-  loadMore = async (node: Node) => {
+  loadMore = async (e: Event, node: Node) => {
     const { pageLimit } = this.props;
     const state: TreeState = { ...this.state };
     if (!isFullyFetched(node)) {
@@ -39,11 +39,11 @@ class Tree extends Component<TreeProps, TreeState> {
 
   onKeyLoadMore = async (e: Event, node: Node): Promise<void> => {
     if (e.key === 'Enter') {
-      await this.loadMore(node);
+      await this.loadMore(e, node);
     }
   };
 
-  toggle = async (node: Node): Promise<void> => {
+  toggle = async (e: Event, node: Node): Promise<void> => {
     const { pageLimit } = this.props;
     const state: TreeState = { ...this.state };
     if (node.children.length === 0 && hasChildren(node)) {
@@ -57,11 +57,11 @@ class Tree extends Component<TreeProps, TreeState> {
 
   onKeyToggle = async (e: Event, node: Node): Promise<void> => {
     if (e.key === 'Enter') {
-      await this.toggle(node);
+      await this.toggle(e, node);
     }
   };
 
-  select = (node: Node): void => {
+  select = (e: Event, node: Node): void => {
     const state: TreeState = { ...this.state };
     node.selected = !node.selected;
     this.setState(state);
@@ -69,7 +69,7 @@ class Tree extends Component<TreeProps, TreeState> {
 
   onKeySelect = (e: Event, node: Node): void => {
     if (e.key === 'Enter') {
-      this.select(node);
+      this.select(e, node);
     }
   };
 
