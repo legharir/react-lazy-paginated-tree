@@ -15,6 +15,7 @@ export type Theme = {
   treeStyle: Object,
   listContainerStyle: Object,
   listStyle: Object,
+  nodeCheckboxStyle: Object,
   nodeStyle: Object,
   nodeIconContainerStyle: Object,
   nodeIconStyle: Object,

@@ -21,6 +21,9 @@ const theme: Theme = prefixer({
     display: 'inline-block',
     textAlign: 'center',
   },
+  nodeCheckboxStyle: {
+    margin: '3px',
+  },
   nodeIconStyle: {
     fill: '#e6e6e6',
     strokeWidth: '0',
