@@ -15,6 +15,8 @@ export type Theme = {
   treeStyle: Object,
   bodyStyle: Object,
   checkboxStyle: Object,
+  checkboxIconStyle: Object,
+  checkboxIconCheckedStyle: Object,
   expanderStyle: Object,
   listItemStyle: Object,
   paginatorStyle: Object,

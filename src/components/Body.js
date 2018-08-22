@@ -2,7 +2,15 @@
 
 import React from 'react';
 import MUIListItemText from '@material-ui/core/ListItemText';
-import type { BodyProps } from '../types';
+import type { BodyProps, Node } from '../types';
+
+const BodyText = ({ node }: { node: Node }) => (
+  <span>
+    {node.name}
+    &nbsp;
+    {node.description ? <i>({node.description})</i> : ''}
+  </span>
+);
 
 const Body = ({ theme, node, onClick, onKeyPress }: BodyProps) => (
   <MUIListItemText
@@ -11,7 +19,7 @@ const Body = ({ theme, node, onClick, onKeyPress }: BodyProps) => (
     tabIndex={0}
     onClick={onClick}
     onKeyPress={onKeyPress}
-    primary={node.name}
+    primary={<BodyText node={node} />}
   />
 );
 

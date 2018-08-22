@@ -2,9 +2,13 @@
 
 import { Tree, TreeNode } from './components';
 
+export { Tree, TreeNode };
+
 export type {
   TreeProps,
+  TreeState,
   TreeNodeProps,
+  TreeNodeState,
   Node,
   Theme,
   CheckboxProps,
@@ -16,6 +20,6 @@ export type {
   DepthPaddingProps,
 } from './types';
 
-export { Tree, TreeNode };
+export { defaultTheme, minimalTheme } from './theme';
 
 export default Tree;
