@@ -7,17 +7,17 @@ export default [
       {
         id: 2,
         name: 'Q1',
-        description: 'Description',
+        description: '',
         children: [
           {
             id: 7,
             name: 'January',
-            description: 'Description',
+            description: '',
             children: [
               {
                 id: 8,
                 name: 'Week 1',
-                description: 'Description',
+                description: '',
                 children: [],
                 numChildren: 0,
                 expanded: true,
@@ -36,7 +36,7 @@ export default [
       {
         id: 3,
         name: 'Q2',
-        description: 'Description',
+        description: '',
         children: [],
         numChildren: 0,
         expanded: true,
@@ -45,7 +45,7 @@ export default [
       {
         id: 4,
         name: 'Q3',
-        description: 'Description',
+        description: '',
         children: [],
         numChildren: 0,
         expanded: true,
@@ -54,7 +54,7 @@ export default [
       {
         id: 9,
         name: 'Q4',
-        description: 'Description',
+        description: '',
         children: [],
         numChildren: 0,
         expanded: true,
