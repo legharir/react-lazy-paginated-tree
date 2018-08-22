@@ -104,7 +104,6 @@ class TreeNode extends Component<TreeNodeProps, TreeNodeState> {
           onClick={e => select(e, node)}
           onKeyPress={e => onKeySelect(e, node)}
         >
-          <Checkbox theme={theme} node={node} checked={node.selected} />
           <DepthPadding indentWidth={indentWidth} depth={depth} />
           {hasChildren(node) ? (
             <Expander
@@ -118,6 +117,7 @@ class TreeNode extends Component<TreeNodeProps, TreeNodeState> {
           ) : (
             <span style={theme.expanderStyle} />
           )}
+          <Checkbox theme={theme} node={node} checked={node.selected} />
           <Body theme={theme} node={node} />
         </ListItem>
         <List theme={theme}>

@@ -10,7 +10,9 @@ const theme: Theme = prefixer({
   treeStyle: {
     padding: 0,
   },
-  bodyStyle: {},
+  bodyStyle: {
+    padding: 0,
+  },
   checkboxStyle: {},
   expanderStyle: {
     width: '20px',
