@@ -1,18 +1,18 @@
 // @flow
 
 import React from 'react';
+import MUIListItemText from '@material-ui/core/ListItemText';
 import type { BodyProps } from '../types';
 
 const Body = ({ theme, node, onClick, onKeyPress }: BodyProps) => (
-  <span
-    style={theme.nodeBodyStyle}
-    onClick={onClick}
-    onKeyPress={onKeyPress}
+  <MUIListItemText
+    style={theme.bodyStyle}
     role="button"
     tabIndex={0}
-  >
-    {node.name}
-  </span>
+    onClick={onClick}
+    onKeyPress={onKeyPress}
+    primary={node.name}
+  />
 );
 
 export default Body;

@@ -1,21 +1,13 @@
 // @flow
 import type { Node, Cache } from '../types';
 
-export const populateCache = (
-  cache: Cache,
-  nodes: Array<Node>,
-  pageLimit?: number,
-): Cache => {
+export const buildCache = (cache: Cache, nodes: Array<Node>): Cache => {
   for (let i = 0; i < nodes.length; i += 1) {
     const node: Node = nodes[i];
-    if (!node.page && pageLimit) {
-      // ensure page is set for pagination
-      node.page = 1;
-    }
     cache[node.id] = node;
     const { children } = node;
     if (children && children.constructor === Array && children.length > 0) {
-      populateCache(cache, children, pageLimit);
+      buildCache(cache, children);
     }
   }
   return cache;

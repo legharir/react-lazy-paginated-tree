@@ -5,7 +5,7 @@ import type { Node, TreeState, TreeProps, Event } from '../types';
 import { hasChildren, isFullyFetched } from '../util';
 import TreeNode from './TreeNode';
 
-import defaultTheme from '../themes/default';
+import defaultTheme from '../theme';
 import DefaultList from './List';
 import DefaultListItem from './ListItem';
 import DefaultExpander from './Expander';
@@ -23,10 +23,20 @@ const DEFAULT_DEPTH = 0;
 class Tree extends Component<TreeProps, TreeState> {
   constructor(props: TreeProps) {
     super(props);
-    const { nodes } = props;
-    this.state = { nodes };
+    const { nodes, parse } = props;
+    this.state = {
+      nodes: parse ? parse(nodes) : nodes,
+    };
     this.loadChildren = props.loadChildren || this.loadChildren;
   }
+
+  setBroadcastedState = (state: TreeState) => {
+    this.setState(state);
+    const { onUpdate } = this.props;
+    if (onUpdate) {
+      onUpdate(state);
+    }
+  };
 
   loadChildren = async (
     node: Node,
@@ -34,14 +44,16 @@ class Tree extends Component<TreeProps, TreeState> {
   ): Promise<Array<Node>> => node.children;
 
   loadMore = async (e: Event, node: Node) => {
-    const { pageLimit } = this.props;
+    const { pageLimit, parse } = this.props;
     const state: TreeState = { ...this.state };
-    if (!isFullyFetched(node)) {
+    if (!isFullyFetched(node) && pageLimit) {
       node.page += 1;
       const loadedChildren = await this.loadChildren(node, pageLimit);
-      node.children = node.children.concat(loadedChildren);
+      node.children = node.children.concat(
+        parse ? parse(loadedChildren) : loadedChildren,
+      );
     }
-    this.setState(state);
+    this.setBroadcastedState(state);
   };
 
   onKeyLoadMore = async (e: Event, node: Node): Promise<void> => {
@@ -51,15 +63,15 @@ class Tree extends Component<TreeProps, TreeState> {
   };
 
   toggle = async (e: Event, node: Node): Promise<void> => {
-    const { pageLimit } = this.props;
+    const { pageLimit, parse } = this.props;
     const state: TreeState = { ...this.state };
     if (node.children.length === 0 && hasChildren(node)) {
       node.page += 1;
       const loadedChildren = await this.loadChildren(node, pageLimit);
-      node.children = loadedChildren;
+      node.children = parse ? parse(loadedChildren) : loadedChildren;
     }
     node.expanded = !node.expanded;
-    this.setState(state);
+    this.setBroadcastedState(state);
   };
 
   onKeyToggle = async (e: Event, node: Node): Promise<void> => {
@@ -71,7 +83,7 @@ class Tree extends Component<TreeProps, TreeState> {
   select = (e: Event, node: Node): void => {
     const state: TreeState = { ...this.state };
     node.selected = !node.selected;
-    this.setState(state);
+    this.setBroadcastedState(state);
   };
 
   onKeySelect = (e: Event, node: Node): void => {
@@ -82,16 +94,13 @@ class Tree extends Component<TreeProps, TreeState> {
 
   render() {
     const {
-      nodes,
-      theme = defaultTheme,
       style,
+      theme = defaultTheme,
       indentWidth,
-      // method overrides
       toggle,
       onKeyToggle,
       select,
       onKeySelect,
-      // component overrides
       List,
       ListItem,
       Expander,
@@ -101,6 +110,9 @@ class Tree extends Component<TreeProps, TreeState> {
       Loading,
       DepthPadding,
     } = this.props;
+
+    const { nodes } = this.state;
+
     return (
       <ul style={{ ...theme.treeStyle, ...style }}>
         {nodes.map((node: Node) => (

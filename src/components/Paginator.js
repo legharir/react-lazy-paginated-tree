@@ -1,18 +1,19 @@
 // @flow
 
 import React from 'react';
+import MUIListItem from '@material-ui/core/ListItem';
+import MUIListItemText from '@material-ui/core/ListItemText';
 import type { ExpanderProps } from '../types';
 
 const Paginator = ({ theme, onClick, onKeyPress }: ExpanderProps) => (
-  <div
-    style={theme.expanderStyle}
+  <MUIListItem
+    button
     onClick={onClick}
     onKeyPress={onKeyPress}
-    role="button"
-    tabIndex={0}
+    style={theme.paginatorStyle}
   >
-    load more...
-  </div>
+    <MUIListItemText style={theme.paginatorTextStyle} primary="Load More" />
+  </MUIListItem>
 );
 
 export default Paginator;

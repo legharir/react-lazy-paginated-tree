@@ -3,98 +3,16 @@
 import React from 'react'; // eslint-disable-line
 import { render } from 'react-dom';
 import axios from 'axios';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import Folder from '@material-ui/icons/Folder';
-import FolderOpen from '@material-ui/icons/FolderOpen';
-import Checkbox from '@material-ui/core/Checkbox';
 import ReactLazyPaginatedTree from './components/Tree';
-import DarkTheme from './themes/dark';
 import SimpleTree from './sample/SimpleTree';
-import SimpleTreeTwo from './sample/SimpleTreeTwo';
-import SimpleTreeThree from './sample/SimpleTreeThree';
 
-import type { Node } from './types';
+import type { Node, TreeState } from './types';
 
 const defaultElem = document.getElementById('default');
-const customElem = document.getElementById('custom');
-const mui = document.getElementById('mui');
-const lazyDefault = document.getElementById('lazyDefault');
-const api = document.getElementById('api');
+const lazyElem = document.getElementById('lazy');
+const paginatedElem = document.getElementById('paginated');
 
-/* MUI COMPONENTS */
-const MUILoading = ({ theme, node }) => (
-  <ListItem
-    style={{
-      paddingTop: 0,
-      paddingBottom: 0,
-      color: '#106EBE',
-    }}
-  >
-    <ListItemText
-      style={{
-        textAlign: 'center',
-      }}
-      primary="Loading..."
-    />
-  </ListItem>
-);
-
-const MUIPaginator = ({ theme, node, onClick, onKeyPress }) => (
-  <ListItem
-    button
-    onClick={onClick}
-    onKeyPress={onKeyPress}
-    style={{
-      paddingTop: 0,
-      paddingBottom: 0,
-      color: '#106EBE',
-    }}
-  >
-    <ListItemText
-      style={{
-        textAlign: 'center',
-      }}
-      primary="Load More"
-    />
-  </ListItem>
-);
-
-const MUIListItem = props => (
-  <ListItem
-    button
-    {...props}
-    style={{
-      backgroundColor: '#f3f3f3',
-      margin: '2px 0',
-      paddingTop: 0,
-      paddingBottom: 0,
-    }}
-  />
-);
-
-const MUIIcon = props => {
-  const { node } = props;
-  return (
-    <ListItemIcon {...props} style={{ marginRight: '0px' }}>
-      {node.expanded ? <FolderOpen /> : <Folder />}
-    </ListItemIcon>
-  );
-};
-
-const MUIBody = props => {
-  const { node } = props;
-  return <ListItemText {...props} primary={node.name} />;
-};
-
-const MUICheckbox = props => {
-  const { node } = props;
-  return <Checkbox {...props} checked={node.selected} />;
-};
-
-/* RENDERING EXAMPLES */
-const transform = (response: Array<Object>): Array<Node> => {
+const parse = (response: Array<Object>): Array<Node> => {
   /* this method assumes that the endpoint orders the response */
   const parsedResponse = [];
   for (let i = 0; i < response.length; i += 1) {
@@ -114,7 +32,11 @@ const transform = (response: Array<Object>): Array<Node> => {
   return parsedResponse;
 };
 
-const loadChildren = (node: Node, pageLimit: number) => {
+const onUpdate = (state: TreeState) => {
+  console.log(state);
+};
+
+const loadChildren = (node: Node, pageLimit: number = 500) => {
   const { id, page } = node;
   // make request
   return axios({
@@ -125,7 +47,7 @@ const loadChildren = (node: Node, pageLimit: number) => {
         'VenaBasic NTEyMDIwMDE5MzEyMzI4NzA0LjUxMjAxOTA2NzQ2OTU2MTg1Njo2MjhhNjRhZDJjMTc0NTM1YWI4M2I3NjA1ZmRiMmJkMw==',
       'Content-Type': 'application/json',
     },
-  }).then(response => transform(response.data));
+  }).then(response => response.data);
 };
 
 // Make a request for a user with a given ID
@@ -139,15 +61,16 @@ axios({
     'Content-Type': 'application/json',
   },
 }).then(response => {
-  const nodes: Array<Node> = transform(response.data);
-  if (lazyDefault) {
+  if (paginatedElem) {
     render(
       <ReactLazyPaginatedTree
-        nodes={nodes}
+        nodes={response.data}
         loadChildren={loadChildren}
+        parse={parse}
         pageLimit={5}
+        onUpdate={onUpdate}
       />,
-      lazyDefault,
+      paginatedElem,
     );
   }
 });
@@ -163,41 +86,20 @@ axios({
     'Content-Type': 'application/json',
   },
 }).then(response => {
-  const nodes: Array<Node> = transform(response.data);
-  if (api) {
+  if (lazyElem) {
     render(
       <ReactLazyPaginatedTree
-        nodes={nodes}
+        nodes={response.data}
         loadChildren={loadChildren}
-        pageLimit={5}
-        ListItem={MUIListItem}
-        Expander={MUIIcon}
-        Checkbox={MUICheckbox}
-        Body={MUIBody}
-        Paginator={MUIPaginator}
-        Loading={MUILoading}
+        parse={parse}
       />,
-      api,
+      lazyElem,
     );
   }
 });
 
-if (defaultElem && customElem && mui) {
+if (defaultElem) {
   render(<ReactLazyPaginatedTree nodes={SimpleTree} />, defaultElem);
-  render(
-    <ReactLazyPaginatedTree nodes={SimpleTreeTwo} theme={DarkTheme} />,
-    customElem,
-  );
-  render(
-    <ReactLazyPaginatedTree
-      nodes={SimpleTreeThree}
-      ListItem={MUIListItem}
-      Expander={MUIIcon}
-      Checkbox={MUICheckbox}
-      Body={MUIBody}
-    />,
-    mui,
-  );
 }
 
 export default ReactLazyPaginatedTree;

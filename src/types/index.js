@@ -13,17 +13,15 @@ export type Node = {
 
 export type Theme = {
   treeStyle: Object,
-  listContainerStyle: Object,
-  listStyle: Object,
-  nodeCheckboxStyle: Object,
-  nodeStyle: Object,
-  nodeIconContainerStyle: Object,
-  nodeIconStyle: Object,
-  nodeBodyStyle: Object,
-  nodeHighlightStyle: Object,
+  bodyStyle: Object,
+  checkboxStyle: Object,
   expanderStyle: Object,
-  expanderIconStyle: Object,
+  listItemStyle: Object,
+  paginatorStyle: Object,
+  paginatorTextStyle: Object,
   loadingStyle: Object,
+  loadingTextStyle: Object,
+  listStyle: Object,
 };
 
 export type Cache = Object;
@@ -35,10 +33,14 @@ export type TreeState = {
 };
 
 export type TreeProps = {
-  style?: Object,
-  nodes: Array<Node>,
+  /* required props */
+  nodes: Array<Node>, // nested object of type: Node (unless you specified parse method)
+  /* required props for pagination */
+  pageLimit?: number, // page limit for pagination
+  parse?: Function, // method to convert an array of entities to node entities
+  /* optional props */
+  style?: Object, // equivalent to overriding theme.treeStyle
   theme?: Theme,
-  pageLimit?: number,
   indentWidth?: number,
   List?: any,
   ListItem?: any,
@@ -53,6 +55,7 @@ export type TreeProps = {
   select?: Function,
   onKeySelect?: Function,
   loadChildren?: Function,
+  onUpdate?: Function,
 };
 
 export type TreeNodeProps = {
@@ -107,6 +110,8 @@ export type ListItemProps = {
   theme: Theme,
   node: Node,
   children: any,
+  onClick: Function,
+  onKeyPress: Function,
 };
 
 export type ListProps = {

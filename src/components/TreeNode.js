@@ -116,7 +116,7 @@ class TreeNode extends Component<TreeNodeProps, TreeNodeState> {
               }
             />
           ) : (
-            <span style={theme.nodeIconContainerStyle} />
+            <span style={theme.expanderStyle} />
           )}
           <Body theme={theme} node={node} />
         </ListItem>
