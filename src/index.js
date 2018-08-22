@@ -1,8 +1,9 @@
 // @flow
 
 import { Tree, TreeNode } from './components';
+import SampleTree from './sample/SimpleTree';
 
-export { Tree, TreeNode };
+export { Tree, TreeNode, SampleTree };
 
 export type {
   TreeProps,
