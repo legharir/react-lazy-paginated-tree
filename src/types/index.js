@@ -35,12 +35,9 @@ export type TreeState = {
 };
 
 export type TreeProps = {
-  /* required props */
-  nodes: Array<Node>, // nested object of type: Node (unless you specified parse method)
-  /* optional props for pagination */
-  pageLimit?: number, // page limit for pagination
-  parse?: Function, // method to convert an array of entities to node entities
-  /* optional props */
+  nodes: Array<Node>,
+  pageLimit?: number,
+  parse?: Function,
   style?: Object, // equivalent to overriding theme.treeStyle
   theme?: Theme,
   indentWidth?: number,

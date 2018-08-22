@@ -3,6 +3,18 @@
   "version": "0.2.1",
   "description":
     "Customizable React Tree-View with Lazy Loading and Pagination",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com:boweihan/react-lazy-paginated-tree.git"
+  },
+  "keywords": [
+    "react",
+    "tree",
+    "treeview",
+    "lazyload",
+    "pagination",
+    "material-ui"
+  ],
   "main": "dist/index.js",
   "dependencies": {
     "@material-ui/core": "^1.5.1",
