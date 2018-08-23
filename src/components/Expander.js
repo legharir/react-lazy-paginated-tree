@@ -11,6 +11,8 @@ const Expander = ({ theme, node, onClick, onKeyPress }: ExpanderProps) => (
     style={theme.expanderStyle}
     onClick={onClick}
     onKeyPress={onKeyPress}
+    tabIndex={0}
+    type="button"
   >
     {node.expanded ? <KeyboardArrowDown /> : <KeyboardArrowUp />}
   </MUIListItemIcon>
