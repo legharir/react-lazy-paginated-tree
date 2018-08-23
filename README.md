@@ -44,7 +44,7 @@ class ReactLazyPaginatedTree extends React.Component {
 }
 
 const content = document.getElementById('content');
-ReactDOM.render(<TreeExample />, content);
+ReactDOM.render(<ReactLazyPaginatedTree />, content);
 ```
 
 ## [Demo](https://boweihan.github.io/rlpt-example/)
