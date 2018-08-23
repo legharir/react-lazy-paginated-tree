@@ -17,6 +17,15 @@ React tree-view component built for performance, customizability and large data 
 npm install react-lazy-paginated-tree --save
 ```
 
+## Dependencies
+
+This library depends on:
+
+* [babel-polyfill](https://babeljs.io/docs/en/babel-polyfill/)
+* [babel-preset-react](https://www.npmjs.com/package/babel-preset-react)
+
+Please ensure that these are included in your project.
+
 ## Quick Start
 
 ```javascript
