@@ -45,9 +45,9 @@ const content = document.getElementById('content');
 ReactDOM.render(<TreeExample />, content);
 ```
 
-## Demo
+## [Demo](https://boweihan.github.io/rlpt-example/)
 
-Coming Soon
+An online demo for the quick start, theming, lazy loading and pagination can be found [Here](https://boweihan.github.io/rlpt-example/).
 
 ## API
 
