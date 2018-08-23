@@ -11,6 +11,8 @@ React tree-view component built for performance, customizability and large data 
 * The ability to override default methods for expanding/collapsing/selecting nodes
 * Keyboard accessibility
 
+<img src="./img.png" width="600px"/>
+
 ## Install
 
 ```
